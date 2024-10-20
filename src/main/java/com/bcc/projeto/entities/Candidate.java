@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_candidate")
+@PrimaryKeyJoinColumn(name = "super_profile_id")
 public class Candidate extends Profile {
 
 	private static final long serialVersionUID = 1L;
@@ -35,8 +37,8 @@ public class Candidate extends Profile {
 
 
 	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre,
-			Date birthDate) {
-		super(id, name, email, telephone, password);
+			Date birthDate, Address address) {
+		super(id, name, email, telephone, password, address);
 		this.cpf = cpf;
 		this.genre = genre;
 		this.birthDate = birthDate;

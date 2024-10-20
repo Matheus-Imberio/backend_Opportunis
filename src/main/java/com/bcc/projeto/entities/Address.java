@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,11 +47,16 @@ public class Address implements Serializable {
 	@Setter
 	private String complement;
 	
-	// TODO relacionamento com a classe User
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Profile owner;
+	
 	
 	public Address() {}
 
-	public Address(Long id, String street, String number, String district, String city, String cep, String complement) {
+	public Address(Long id, String street, String number, String district, String city, String cep, String complement, Profile owner) {
 		super();
 		this.id = id;
 		this.street = street;
@@ -58,6 +65,7 @@ public class Address implements Serializable {
 		this.city = city;
 		this.cep = cep;
 		this.complement = complement;
+		this.owner = owner;
 	}
 
 	@Override
