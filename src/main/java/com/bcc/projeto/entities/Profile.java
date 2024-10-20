@@ -35,7 +35,20 @@ public abstract class Profile implements Serializable {
 	@Setter
 	private String password;
 	
+	// TODO relacionamento com classe Address
 	
+	
+	public Profile() {}
+	
+	public Profile(Long id, String name, String email, String telephone, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.telephone = telephone;
+		this.password = password;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(email, id, name, password, telephone);
