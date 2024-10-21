@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tb_company")
@@ -16,28 +14,11 @@ public class Company extends Profile {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
-	@Setter
 	private String socialName;
-	
-	@Getter
-	@Setter
 	private String cnpj;
-	
-	@Getter
-	@Setter
 	private int qtdEmployee;
-	
-	@Getter
-	@Setter
 	private String site;
-	
-	@Getter
-	@Setter
 	private String companySector;
-	
-	@Getter
-	@Setter
 	private String nationality;
 	
 	// TODO relacionamento com Feedback
@@ -54,6 +35,54 @@ public class Company extends Profile {
 		this.qtdEmployee = qtdEmployee;
 		this.site = site;
 		this.companySector = companySector;
+		this.nationality = nationality;
+	}
+	
+	public String getSocialName() {
+		return socialName;
+	}
+
+	public void setSocialName(String socialName) {
+		this.socialName = socialName;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public int getQtdEmployee() {
+		return qtdEmployee;
+	}
+
+	public void setQtdEmployee(int qtdEmployee) {
+		this.qtdEmployee = qtdEmployee;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public String getCompanySector() {
+		return companySector;
+	}
+
+	public void setCompanySector(String companySector) {
+		this.companySector = companySector;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
 

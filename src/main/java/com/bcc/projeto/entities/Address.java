@@ -10,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tb_address")
@@ -23,32 +21,13 @@ public class Address implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Getter
-	@Setter
 	private String street;
-	
-	@Getter
-	@Setter
 	private String number;
-	
-	@Getter
-	@Setter
 	private String district;
-	
-	@Getter
-	@Setter
 	private String city;
-	
-	@Getter
-	@Setter
 	private String cep;
-	
-	@Getter
-	@Setter
 	private String complement;
 	
-	@Getter
-	@Setter
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Profile owner;
@@ -65,6 +44,70 @@ public class Address implements Serializable {
 		this.city = city;
 		this.cep = cep;
 		this.complement = complement;
+		this.owner = owner;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public Profile getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Profile owner) {
 		this.owner = owner;
 	}
 
