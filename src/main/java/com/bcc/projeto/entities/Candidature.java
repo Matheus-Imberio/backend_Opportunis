@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Candidature implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Instant date;
+	
+	@ManyToOne
+	@JoinColumn(name = "candidate_id")
+	private Candidate candidate;
 	
 	// TODO relacionamento com Vacancy
 	// TODO relacionamento com Candidate
@@ -47,6 +53,14 @@ public class Candidature implements Serializable {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+	
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	@Override

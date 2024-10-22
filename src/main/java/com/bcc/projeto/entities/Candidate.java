@@ -1,9 +1,12 @@
 package com.bcc.projeto.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
@@ -18,8 +21,10 @@ public class Candidate extends Profile {
 	private char genre;
 	private Date birthDate;
 	
+	@OneToMany(mappedBy = "candidate")
+	private List<Candidature> candidatures = new ArrayList<>();
+	
 	// TODO relacionamento com classe Curriculum
-	// TODO relacionamento com classe Applicant
 	// TODO relacionamento com classe Feedback
 	
 	
@@ -55,6 +60,10 @@ public class Candidate extends Profile {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public List<Candidature> getCandidatures() {
+		return candidatures;
 	}
 
 	@Override
