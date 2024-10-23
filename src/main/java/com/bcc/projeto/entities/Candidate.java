@@ -24,8 +24,10 @@ public class Candidate extends Profile {
 	@OneToMany(mappedBy = "candidate")
 	private List<Candidature> candidatures = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "user")
+	private List<Feedback> feedbacks = new ArrayList<>();	
+	
 	// TODO relacionamento com classe Curriculum
-	// TODO relacionamento com classe Feedback
 	
 	
 	public Candidate() {}
@@ -64,6 +66,10 @@ public class Candidate extends Profile {
 	
 	public List<Candidature> getCandidatures() {
 		return candidatures;
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
 	}
 
 	@Override

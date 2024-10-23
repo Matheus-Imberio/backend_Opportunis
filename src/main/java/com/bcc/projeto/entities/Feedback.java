@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,9 +22,12 @@ public class Feedback implements Serializable {
 	private Long id;
 	private String comment;
 	private int score;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Candidate user;
 	
 	// TODO relacionamento com Company
-	// TODO relacionamento com Candidate
 	
 	
 	public Feedback() {}
@@ -56,6 +61,14 @@ public class Feedback implements Serializable {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+	
+	public Candidate getUser() {
+		return user;
+	}
+
+	public void setUser(Candidate user) {
+		this.user = user;
 	}
 
 	@Override
