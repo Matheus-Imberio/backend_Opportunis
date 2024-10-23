@@ -28,7 +28,6 @@ public class Candidature implements Serializable {
 	private Candidate candidate;
 	
 	// TODO relacionamento com Vacancy
-	// TODO relacionamento com Candidate
 	
 	
 	public Candidature() {}

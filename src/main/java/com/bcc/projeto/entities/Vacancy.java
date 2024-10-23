@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +26,10 @@ public class Vacancy implements Serializable {
 	private float wage;
 	private int qtdCandidate;
 	
-	// TODO relacionamento com Company
+	@ManyToOne
+	@JoinColumn(name = "company_id")
+	private Company company;
+	
 	// TODO relacionamento com Applicant
 	
 	
@@ -86,6 +91,14 @@ public class Vacancy implements Serializable {
 
 	public void setQtdCandidate(int qtdCandidate) {
 		this.qtdCandidate = qtdCandidate;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override

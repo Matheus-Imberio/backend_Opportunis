@@ -27,7 +27,9 @@ public class Feedback implements Serializable {
 	@JoinColumn(name = "user_id")
 	private Candidate user;
 	
-	// TODO relacionamento com Company
+	@ManyToOne
+	@JoinColumn(name = "company_id")
+	private Company company;
 	
 	
 	public Feedback() {}
@@ -69,6 +71,14 @@ public class Feedback implements Serializable {
 
 	public void setUser(Candidate user) {
 		this.user = user;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override
