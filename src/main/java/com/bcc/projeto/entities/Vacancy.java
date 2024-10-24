@@ -1,6 +1,8 @@
 package com.bcc.projeto.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,7 +33,8 @@ public class Vacancy implements Serializable {
 	@JoinColumn(name = "company_id")
 	private Company company;
 	
-	// TODO relacionamento com Applicant
+	@OneToMany(mappedBy = "vacancy")
+	private List<Candidature> candidatures = new ArrayList<>();
 	
 	
 	public Vacancy() {}
@@ -99,6 +103,10 @@ public class Vacancy implements Serializable {
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	public List<Candidature> getCandidatures() {
+		return candidatures;
 	}
 
 	@Override

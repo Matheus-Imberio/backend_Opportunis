@@ -27,7 +27,9 @@ public class Candidature implements Serializable {
 	@JoinColumn(name = "candidate_id")
 	private Candidate candidate;
 	
-	// TODO relacionamento com Vacancy
+	@ManyToOne
+	@JoinColumn(name = "vacancy_id")
+	private Vacancy vacancy;
 	
 	
 	public Candidature() {}
@@ -60,6 +62,14 @@ public class Candidature implements Serializable {
 
 	public void setCandidate(Candidate candidate) {
 		this.candidate = candidate;
+	}
+
+	public Vacancy getVacancy() {
+		return vacancy;
+	}
+
+	public void setVacancy(Vacancy vacancy) {
+		this.vacancy = vacancy;
 	}
 
 	@Override
