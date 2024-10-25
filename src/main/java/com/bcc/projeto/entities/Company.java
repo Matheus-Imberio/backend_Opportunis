@@ -1,10 +1,13 @@
 package com.bcc.projeto.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,8 +24,11 @@ public class Company extends Profile {
 	private String companySector;
 	private String nationality;
 	
-	// TODO relacionamento com Feedback
-	// TODO relacionamento com Vacancy
+	@OneToMany(mappedBy = "company")
+	private List<Feedback> feedbacks = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "company")
+	private List<Vacancy> vacancies = new ArrayList<>();
 	
 	
 	public Company() {}
@@ -84,6 +90,14 @@ public class Company extends Profile {
 
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+	
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+	
+	public List<Vacancy> getVacancies() {
+		return vacancies;
 	}
 
 	@Override
