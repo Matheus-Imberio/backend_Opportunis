@@ -28,6 +28,17 @@ public abstract class Experience implements Serializable {
 	private Instant dateEnd;
 	
 	
+	public Experience() {}
+	
+	public Experience(long id, String organization, String description, Instant dateBegin, Instant dateEnd) {
+		super();
+		this.id = id;
+		this.organization = organization;
+		this.description = description;
+		this.dateBegin = dateBegin;
+		this.dateEnd = dateEnd;
+	}
+
 	public long getId() {
 		return id;
 	}
