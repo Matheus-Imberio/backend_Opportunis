@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -39,15 +41,19 @@ public class Curriculum implements Serializable {
 	@OneToMany(mappedBy = "curriculum")
 	private List<Skill> skills = new ArrayList<>();
 	
-	// TODO relacionamento com Candidate
+	@ManyToOne
+	@JoinColumn(name = "candidate_id")
+	private Candidate candidate;
+	
 	
 	public Curriculum() {}
 	
-	public Curriculum(long id, String professionalGoal, String additionalInfo) {
+	public Curriculum(long id, String professionalGoal, String additionalInfo, Candidate candidate) {
 		super();
 		this.id = id;
 		this.professionalGoal = professionalGoal;
 		this.additionalInfo = additionalInfo;
+		this.candidate = candidate;
 	}
 
 	public long getId() {
@@ -87,6 +93,14 @@ public class Curriculum implements Serializable {
 
 	public List<Course> getCoursesExperiences() {
 		return coursesExperiences;
+	}
+
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	@Override
