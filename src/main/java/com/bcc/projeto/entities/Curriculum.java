@@ -1,15 +1,16 @@
 package com.bcc.projeto.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +33,12 @@ public class Curriculum implements Serializable {
 	
 	@OneToOne(mappedBy = "curriculum")
 	private Course experienceCourse;
+	
+	@OneToMany(mappedBy = "curriculum")
+	private List<Language> languages = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "curriculum")
+	private List<Skill> skills = new ArrayList<>();
 	
 	// TODO relacionamento com Candidate
 	
@@ -85,6 +92,14 @@ public class Curriculum implements Serializable {
 	public void setExperienceCourse(Course experienceCourse) {
 		this.experienceCourse = experienceCourse;
 	}
+	public List<Language> getLanguages() {
+		return languages;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(additionalInfo, id, professionalGoal);
