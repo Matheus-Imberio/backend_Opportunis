@@ -6,7 +6,7 @@ import java.util.Objects;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
@@ -17,7 +17,7 @@ public class AcademicBackground extends Experience {
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "curriculum_id")
 	private Curriculum curriculum;
 

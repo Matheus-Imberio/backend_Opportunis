@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,14 +24,14 @@ public class Curriculum implements Serializable {
 	private String professionalGoal;
 	private String additionalInfo;
 	
-	@OneToOne(mappedBy = "curriculum")
-	private Professional experienceProfessional;
+	@OneToMany(mappedBy = "curriculum")
+	private List<Professional> professionalExperiences = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "curriculum")
-	private AcademicBackground experienceAcademicBackground;
+	@OneToMany(mappedBy = "curriculum")
+	private List<AcademicBackground> academicBackgroundExperience = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "curriculum")
-	private Course experienceCourse;
+	@OneToMany(mappedBy = "curriculum")
+	private List<Course> coursesExperiences = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "curriculum")
 	private List<Language> languages = new ArrayList<>();
@@ -44,15 +43,11 @@ public class Curriculum implements Serializable {
 	
 	public Curriculum() {}
 	
-	public Curriculum(long id, String professionalGoal, String additionalInfo, Professional experienceProfessional,
-			AcademicBackground experienceAcademicBackground, Course experienceCourse) {
+	public Curriculum(long id, String professionalGoal, String additionalInfo) {
 		super();
 		this.id = id;
 		this.professionalGoal = professionalGoal;
 		this.additionalInfo = additionalInfo;
-		this.experienceProfessional = experienceProfessional;
-		this.experienceAcademicBackground = experienceAcademicBackground;
-		this.experienceCourse = experienceCourse;
 	}
 
 	public long getId() {
@@ -74,30 +69,24 @@ public class Curriculum implements Serializable {
 		this.additionalInfo = additionalInfo;
 	}
 	
-	public Professional getExperienceProfessional() {
-		return experienceProfessional;
-	}
-	public void setExperienceProfessional(Professional experienceProfessional) {
-		this.experienceProfessional = experienceProfessional;
-	}
-	public AcademicBackground getExperienceAcademicBackground() {
-		return experienceAcademicBackground;
-	}
-	public void setExperienceAcademicBackground(AcademicBackground experienceAcademicBackground) {
-		this.experienceAcademicBackground = experienceAcademicBackground;
-	}
-	public Course getExperienceCourse() {
-		return experienceCourse;
-	}
-	public void setExperienceCourse(Course experienceCourse) {
-		this.experienceCourse = experienceCourse;
-	}
 	public List<Language> getLanguages() {
 		return languages;
 	}
 
 	public List<Skill> getSkills() {
 		return skills;
+	}
+
+	public List<Professional> getProfessionalExperiences() {
+		return professionalExperiences;
+	}
+
+	public List<AcademicBackground> getAcademicBackgroundExperience() {
+		return academicBackgroundExperience;
+	}
+
+	public List<Course> getCoursesExperiences() {
+		return coursesExperiences;
 	}
 
 	@Override
