@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Profile;
 import com.bcc.projeto.entities.Address;
 import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.entities.Curriculum;
+import com.bcc.projeto.entities.Professional;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
@@ -30,11 +32,11 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Candidate candidate1 = new Candidate(null, "Ruan", "ruan@gmail.com", "44988882222", "123r", "11122233344", 'M', null, null);
-		Candidate candidate2 = new Candidate(null, "Matheus", "matheus@gmail.com", "11877776666", "math321", "00011100022", 'M', null, null);
-		Candidate candidate3 = new Candidate(null, "Victor", "victor@gmail.com", "10988880000", "vetor987", "22233344455", 'M', null, null);
-		Candidate candidate4 = new Candidate(null, "Hudson", "hudson@gmail.com", "439000011111", "1928hud", "33344455566", 'M', null, null);
-	
+		Candidate candidate1 = new Candidate(null, "Ruan", "ruan@gmail.com", "44988882222", "123r", "11122233344", 'M', null);
+		Candidate candidate2 = new Candidate(null, "Matheus", "matheus@gmail.com", "11877776666", "math321", "00011100022", 'M', null);
+		Candidate candidate3 = new Candidate(null, "Victor", "victor@gmail.com", "10988880000", "vetor987", "22233344455", 'M', null);
+		Candidate candidate4 = new Candidate(null, "Hudson", "hudson@gmail.com", "439000011111", "1928hud", "33344455566", 'M', null);
+		
 		Company company1 = new Company(null, "Alura cursos online", "alura@gmail.com", "44999999999", "123", "ALURA C O LTDA", "11222333000144", 25, "wwww.alura.com.br", "educação", "brasileira");
 		Company company2 = new Company(null, "Dona Maura Boate", "maura@gmail.com", "44988888888", "321", "DONA MAURA B LTDA", "222222220000222", 15, null, "educação", "brasileira");
 		

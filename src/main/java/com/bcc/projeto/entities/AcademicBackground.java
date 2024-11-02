@@ -28,6 +28,7 @@ public class AcademicBackground extends Experience {
 			Curriculum curriculum) {
 		super(id, organization, description, dateBegin, dateEnd);
 		this.curriculum = curriculum;
+		this.curriculum.getAcademicBackgroundExperience().add(this);
 	}
 
 	public Curriculum getCurriculum() {

@@ -34,7 +34,7 @@ public class Candidate extends Profile {
 	public Candidate() {}
 
 	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre,
-			Date birthDate, Address address) {
+			Date birthDate) {
 		super(id, name, email, telephone, password);
 		this.cpf = cpf;
 		this.genre = genre;

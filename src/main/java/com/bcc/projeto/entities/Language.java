@@ -39,6 +39,7 @@ public class Language implements Serializable {
 		this.language = language;
 		this.level = level;
 		this.curriculum = curriculum;
+		this.curriculum.getLanguages().add(this);
 	}
 	
 	public int getId() {

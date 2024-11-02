@@ -28,6 +28,7 @@ public class Professional extends Experience {
 			Curriculum curriculum) {
 		super(id, organization, description, dateBegin, dateEnd);
 		this.curriculum = curriculum;
+		this.curriculum.getProfessionalExperiences().add(this);
 	}
 
 	public Curriculum getCurriculum() {

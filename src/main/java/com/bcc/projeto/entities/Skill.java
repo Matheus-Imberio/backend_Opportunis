@@ -30,10 +30,12 @@ public class Skill implements Serializable {
 
 	public Skill() {}
 
-	public Skill(int id, String name) {
+	public Skill(int id, String name, Curriculum curriculum) {
 		super();
 		Id = id;
 		this.name = name;
+		this.curriculum = curriculum;
+		this.curriculum.getSkills().add(this);
 	}
 
 	public int getId() {

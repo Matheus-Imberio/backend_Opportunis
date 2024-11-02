@@ -28,6 +28,7 @@ public class Course extends Experience {
 			Curriculum curriculum) {
 		super(id, organization, description, dateBegin, dateEnd);
 		this.curriculum = curriculum;
+		this.curriculum.getCoursesExperiences().add(this);
 	}
 
 	public Curriculum getCurriculum() {
