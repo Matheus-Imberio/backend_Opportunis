@@ -33,7 +33,7 @@ public class Company extends Profile {
 	
 	public Company() {}
 
-	public Company(Long id, String name, String email, String telephone, String password, Address address,
+	public Company(Long id, String name, String email, String telephone, String password,
 			String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
