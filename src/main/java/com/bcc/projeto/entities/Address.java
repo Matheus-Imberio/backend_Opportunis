@@ -45,6 +45,7 @@ public class Address implements Serializable {
 		this.cep = cep;
 		this.complement = complement;
 		this.owner = owner;
+		this.owner.addNewAddress(this);
 	}
 	
 	public Long getId() {

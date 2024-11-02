@@ -38,14 +38,13 @@ public abstract class Profile implements Serializable {
 	
 	public Profile() {}
 	
-	public Profile(Long id, String name, String email, String telephone, String password, Address address) {
+	public Profile(Long id, String name, String email, String telephone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.telephone = telephone;
 		this.password = password;
-		addresses.add(address);
 	}
 	
 	@JsonIgnoreProperties
