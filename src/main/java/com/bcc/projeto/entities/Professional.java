@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_professional")
-@PrimaryKeyJoinColumn(name = "professional_id")
+@PrimaryKeyJoinColumn(name = "experience_professional_id")
 public class Professional extends Experience {
 
 	private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class Professional extends Experience {
 	
 	public Professional() {}
 	
-	public Professional(long id, String organization, String description, Instant dateBegin, Instant dateEnd,
+	public Professional(Long id, String organization, String description, Instant dateBegin, Instant dateEnd,
 			Curriculum curriculum) {
 		super(id, organization, description, dateBegin, dateEnd);
 		this.curriculum = curriculum;

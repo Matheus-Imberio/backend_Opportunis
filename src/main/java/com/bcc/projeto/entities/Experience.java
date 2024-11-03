@@ -20,8 +20,8 @@ public abstract class Experience implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String organization;
 	private String description;
 	private Instant dateBegin;
@@ -30,7 +30,7 @@ public abstract class Experience implements Serializable {
 	
 	public Experience() {}
 	
-	public Experience(long id, String organization, String description, Instant dateBegin, Instant dateEnd) {
+	public Experience(Long id, String organization, String description, Instant dateBegin, Instant dateEnd) {
 		super();
 		this.id = id;
 		this.organization = organization;
@@ -39,10 +39,10 @@ public abstract class Experience implements Serializable {
 		this.dateEnd = dateEnd;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getOrganization() {

@@ -22,7 +22,7 @@ public class Curriculum implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "curriculum_id")
 	private Long id;
 	private String professionalGoal;
@@ -50,7 +50,7 @@ public class Curriculum implements Serializable {
 	
 	public Curriculum() {}
 	
-	public Curriculum(long id, String professionalGoal, String additionalInfo, Candidate candidate) {
+	public Curriculum(Long id, String professionalGoal, String additionalInfo, Candidate candidate) {
 		super();
 		this.id = id;
 		this.professionalGoal = professionalGoal;

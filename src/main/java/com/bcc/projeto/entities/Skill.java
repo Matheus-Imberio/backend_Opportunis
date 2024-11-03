@@ -19,8 +19,8 @@ public class Skill implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Id;
 	private String name;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -30,7 +30,7 @@ public class Skill implements Serializable {
 
 	public Skill() {}
 
-	public Skill(int id, String name, Curriculum curriculum) {
+	public Skill(Long id, String name, Curriculum curriculum) {
 		super();
 		Id = id;
 		this.name = name;
@@ -38,11 +38,11 @@ public class Skill implements Serializable {
 		this.curriculum.getSkills().add(this);
 	}
 
-	public int getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 

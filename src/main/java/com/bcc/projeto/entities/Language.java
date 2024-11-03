@@ -22,7 +22,7 @@ public class Language implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String language;
 	private Level level;
 	
@@ -33,7 +33,7 @@ public class Language implements Serializable {
 	
 	public Language() {}
 
-	public Language(int id, String language, Level level, Curriculum curriculum) {
+	public Language(Long id, String language, Level level, Curriculum curriculum) {
 		super();
 		this.id = id;
 		this.language = language;
@@ -42,11 +42,11 @@ public class Language implements Serializable {
 		this.curriculum.getLanguages().add(this);
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
