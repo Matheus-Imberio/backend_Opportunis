@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,7 +45,6 @@ public abstract class Profile implements Serializable {
 		this.password = password;
 	}
 	
-	@JsonIgnoreProperties
 	public void addNewAddress(Address address) {
 		addresses.add(address);
 	}
@@ -91,6 +89,7 @@ public abstract class Profile implements Serializable {
 		this.password = password;
 	}
 
+	@JsonIgnore
 	public List<Address> getAddresses() {
 		return addresses;
 	}

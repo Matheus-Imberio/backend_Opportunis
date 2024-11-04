@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -65,14 +67,17 @@ public class Candidate extends Profile {
 		this.birthDate = birthDate;
 	}
 	
+	@JsonIgnore
 	public List<Candidature> getCandidatures() {
 		return candidatures;
 	}
 
+	@JsonIgnore
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
 
+	@JsonIgnore
 	public List<Curriculum> getCurriculumns() {
 		return curriculumns;
 	}
