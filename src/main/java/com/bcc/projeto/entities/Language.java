@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.bcc.projeto.entities.enums.Level;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -66,6 +67,7 @@ public class Language implements Serializable {
 		this.level = level;
 	}
 
+	@JsonIgnore
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}

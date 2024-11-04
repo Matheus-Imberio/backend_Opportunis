@@ -3,6 +3,8 @@ package com.bcc.projeto.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -29,6 +31,7 @@ public class Professional extends Experience {
 		this.curriculum.getProfessionalExperiences().add(this);
 	}
 
+	@JsonIgnore
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
