@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_candidate")
-@PrimaryKeyJoinColumn(name = "profile_candidate_id")
+@PrimaryKeyJoinColumn(name = "candidate_id")
 public class Candidate extends Profile {
 
 	private static final long serialVersionUID = 1L;

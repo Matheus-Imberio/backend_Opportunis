@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_company")
-@PrimaryKeyJoinColumn(name = "profile_company_id")
+@PrimaryKeyJoinColumn(name = "company_id")
 public class Company extends Profile {
 
 	private static final long serialVersionUID = 1L;
