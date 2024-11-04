@@ -8,10 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
 
 @MappedSuperclass
-@Table(name = "tb_experience")
 public abstract class Experience implements Serializable {
 
 	private static final long serialVersionUID = 1L;
