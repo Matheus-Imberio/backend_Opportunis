@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +22,9 @@ public class Curriculum implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "curriculum_id")
+	private Long id;
 	private String professionalGoal;
 	private String additionalInfo;
 	
@@ -48,7 +50,7 @@ public class Curriculum implements Serializable {
 	
 	public Curriculum() {}
 	
-	public Curriculum(long id, String professionalGoal, String additionalInfo, Candidate candidate) {
+	public Curriculum(Long id, String professionalGoal, String additionalInfo, Candidate candidate) {
 		super();
 		this.id = id;
 		this.professionalGoal = professionalGoal;

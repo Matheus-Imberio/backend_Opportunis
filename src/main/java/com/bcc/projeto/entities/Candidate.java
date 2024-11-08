@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -12,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_candidate")
-@PrimaryKeyJoinColumn(name = "super_profile_id")
+@PrimaryKeyJoinColumn(name = "candidate_id")
 public class Candidate extends Profile {
 
 	private static final long serialVersionUID = 1L;
@@ -34,8 +36,8 @@ public class Candidate extends Profile {
 	public Candidate() {}
 
 	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre,
-			Date birthDate, Address address) {
-		super(id, name, email, telephone, password, address);
+			Date birthDate) {
+		super(id, name, email, telephone, password);
 		this.cpf = cpf;
 		this.genre = genre;
 		this.birthDate = birthDate;
@@ -65,14 +67,17 @@ public class Candidate extends Profile {
 		this.birthDate = birthDate;
 	}
 	
+	@JsonIgnore
 	public List<Candidature> getCandidatures() {
 		return candidatures;
 	}
 
+	@JsonIgnore
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
 
+	@JsonIgnore
 	public List<Curriculum> getCurriculumns() {
 		return curriculumns;
 	}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.bcc.projeto.entities.enums.Level;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,7 +23,7 @@ public class Language implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String language;
 	private Level level;
 	
@@ -33,19 +34,20 @@ public class Language implements Serializable {
 	
 	public Language() {}
 
-	public Language(int id, String language, Level level, Curriculum curriculum) {
+	public Language(Long id, String language, Level level, Curriculum curriculum) {
 		super();
 		this.id = id;
 		this.language = language;
 		this.level = level;
 		this.curriculum = curriculum;
+		this.curriculum.getLanguages().add(this);
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -65,6 +67,7 @@ public class Language implements Serializable {
 		this.level = level;
 	}
 
+	@JsonIgnore
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}

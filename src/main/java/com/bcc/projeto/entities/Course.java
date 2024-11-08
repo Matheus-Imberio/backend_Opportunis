@@ -3,16 +3,16 @@ package com.bcc.projeto.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_course")
-@PrimaryKeyJoinColumn(name = "course_id")
 public class Course extends Experience {
 
 	private static final long serialVersionUID = 1L;
@@ -24,12 +24,14 @@ public class Course extends Experience {
 	
 	public Course() {}
 	
-	public Course(long id, String organization, String description, Instant dateBegin, Instant dateEnd,
+	public Course(Long id, String organization, String description, Instant dateBegin, Instant dateEnd,
 			Curriculum curriculum) {
 		super(id, organization, description, dateBegin, dateEnd);
 		this.curriculum = curriculum;
+		this.curriculum.getCoursesExperiences().add(this);
 	}
 
+	@JsonIgnore
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}

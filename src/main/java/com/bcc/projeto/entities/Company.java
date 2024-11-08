@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_company")
-@Inheritance(strategy = InheritanceType.JOINED)
+@PrimaryKeyJoinColumn(name = "company_id")
 public class Company extends Profile {
 
 	private static final long serialVersionUID = 1L;
@@ -33,9 +32,9 @@ public class Company extends Profile {
 	
 	public Company() {}
 
-	public Company(Long id, String name, String email, String telephone, String password, Address address,
+	public Company(Long id, String name, String email, String telephone, String password,
 			String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
-		super(id, name, email, telephone, password, address);
+		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
 		this.qtdEmployee = qtdEmployee;
