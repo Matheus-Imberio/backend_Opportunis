@@ -20,7 +20,7 @@ import com.bcc.projeto.entities.enums.Level;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
-import com.bcc.projeto.repositories.CurriculumRepository;
+import com.bcc.projeto.service.CurriculumService;
 
 @Configuration
 @Profile("dev")
@@ -36,7 +36,7 @@ public class TestConfig implements CommandLineRunner {
 	private CompanyRepository companyRepo;
 	
 	@Autowired
-	private CurriculumRepository curriculumRepo;
+	private CurriculumService curriculumService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -72,8 +72,7 @@ public class TestConfig implements CommandLineRunner {
 		candidateRepo.saveAll(Arrays.asList(candidate1, candidate2, candidate3, candidate4));
 		companyRepo.saveAll(Arrays.asList(company1, company2));
 		adressRepo.saveAll(Arrays.asList(ender1, ender2, ender3, ender4, ender5, ender6, ender7));
-		curriculumRepo.saveAll(Arrays.asList(curr1, curr2));
-		
+		curriculumService.save(curr1);
+		curriculumService.save(curr2);
 	}
-
 }

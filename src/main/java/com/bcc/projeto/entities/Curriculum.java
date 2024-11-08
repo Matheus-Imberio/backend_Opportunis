@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,19 +29,19 @@ public class Curriculum implements Serializable {
 	private String professionalGoal;
 	private String additionalInfo;
 	
-	@OneToMany(mappedBy = "curriculum")
+	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private List<Professional> professionalExperiences = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum")
+	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private List<AcademicBackground> academicBackgroundExperience = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum")
+	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private List<Course> coursesExperiences = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum")
+	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private List<Language> languages = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum")
+	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private List<Skill> skills = new ArrayList<>();
 	
 	@ManyToOne

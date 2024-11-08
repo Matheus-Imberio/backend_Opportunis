@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,7 +16,7 @@ public class AcademicBackground extends Experience {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "curriculum_id")
 	private Curriculum curriculum;
 
