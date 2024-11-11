@@ -62,6 +62,9 @@ public class AdministratorService {
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
         entity.setTelephone(obj.getTelephone());
+        entity.setBirthDate(obj.getBirthDate());
+        entity.setCpf(obj.getCpf());
+        entity.setPassword(obj.getPassword());
     }
 
 }
