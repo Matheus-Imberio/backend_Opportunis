@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.bcc.projeto.entities.enums.Roles;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -22,6 +23,7 @@ public class Company extends Profile {
 	private String site;
 	private String companySector;
 	private String nationality;
+	private final Integer role = Roles.Enterprise.ordinal();
 	
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
@@ -98,6 +100,8 @@ public class Company extends Profile {
 	public List<Vacancy> getVacancies() {
 		return vacancies;
 	}
+
+	public Integer getRole() {return role; }
 
 	@Override
 	public int hashCode() {
