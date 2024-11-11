@@ -22,7 +22,7 @@ public class Candidate extends Profile {
 	private String cpf;
 	private char genre;
 	private Date birthDate;
-	
+
 	@OneToMany(mappedBy = "candidate")
 	private List<Candidature> candidatures = new ArrayList<>();
 	
@@ -66,7 +66,7 @@ public class Candidate extends Profile {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 	@JsonIgnore
 	public List<Candidature> getCandidatures() {
 		return candidatures;
