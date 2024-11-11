@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.bcc.projeto.entities.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -22,7 +23,7 @@ public class Candidate extends Profile {
 	private String cpf;
 	private char genre;
 	private Date birthDate;
-	
+
 	@OneToMany(mappedBy = "candidate")
 	private List<Candidature> candidatures = new ArrayList<>();
 	
@@ -31,7 +32,7 @@ public class Candidate extends Profile {
 	
 	@OneToMany(mappedBy = "candidate")
 	private List<Curriculum> curriculumns = new ArrayList<>();
-	
+	private final Integer role = Roles.Candidate.ordinal();
 	
 	public Candidate() {}
 
@@ -66,7 +67,7 @@ public class Candidate extends Profile {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 	@JsonIgnore
 	public List<Candidature> getCandidatures() {
 		return candidatures;
@@ -81,6 +82,8 @@ public class Candidate extends Profile {
 	public List<Curriculum> getCurriculumns() {
 		return curriculumns;
 	}
+
+	public Integer getRole() {return role; }
 
 	@Override
 	public int hashCode() {
