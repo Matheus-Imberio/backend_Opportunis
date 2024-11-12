@@ -1,39 +1,35 @@
 package com.bcc.projeto.controller;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-
-import com.bcc.projeto.services.CandidateService;
+import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.repositories.CandidateRepository;
+import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/candidates")
-public class CandidateController {
+@RequestMapping("/companies")
+public class CompanyController {
 
 	@Autowired
-	private CandidateService service;
+	private CompanyService service;
 
 	@GetMapping
-	public ResponseEntity<List<Candidate>> findAll() {
-		List<Candidate> list = service.findAll();
+	public ResponseEntity<List<Company>> findAll() {
+		List<Company> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Candidate> FindById(@PathVariable Long id) {
-		Candidate obj = service.findById(id);
+	public ResponseEntity<Company> FindById(@PathVariable Long id) {
+		Company obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	@PostMapping
-	public ResponseEntity<Candidate> insert(@RequestBody Candidate obj) {
+	public ResponseEntity<Company> insert(@RequestBody Company obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
@@ -44,7 +40,7 @@ public class CandidateController {
 		return ResponseEntity.noContent().build();
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Candidate> update(@PathVariable Long id,@RequestBody Candidate obj){
+	public ResponseEntity<Company> update(@PathVariable Long id,@RequestBody Company obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
