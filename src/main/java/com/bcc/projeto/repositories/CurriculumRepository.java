@@ -44,5 +44,9 @@ public class CurriculumRepository {
 		return entityManager.merge(curriculum);
 	}
 	
-	// TODO delete
+	@Transactional
+	public void delete(Long id) {
+		Curriculum obj = entityManager.find(Curriculum.class, id);
+		entityManager.remove(obj);
+	}
 }

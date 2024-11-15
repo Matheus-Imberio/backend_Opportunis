@@ -45,5 +45,8 @@ public class CurriculumService {
 		
 		return curriculumRepo.update(obj);
 	}
-	// TODO delete
+	
+	public void delete(Long id) {
+		curriculumRepo.delete(id);
+	}
 }
