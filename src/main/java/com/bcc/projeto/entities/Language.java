@@ -6,7 +6,6 @@ import java.util.Objects;
 import com.bcc.projeto.entities.enums.Level;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +26,7 @@ public class Language implements Serializable {
 	private String language;
 	private Level level;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "curriculum_id")
 	private Curriculum curriculum;
 	

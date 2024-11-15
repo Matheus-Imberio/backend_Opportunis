@@ -20,7 +20,7 @@ import com.bcc.projeto.entities.enums.Level;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
-import com.bcc.projeto.repositories.CurriculumRepository;
+import com.bcc.projeto.service.CurriculumService;
 
 @Configuration
 @Profile("dev")
@@ -36,7 +36,7 @@ public class TestConfig implements CommandLineRunner {
 	private CompanyRepository companyRepo;
 	
 	@Autowired
-	private CurriculumRepository curriculumRepo;
+	private CurriculumService curriculumService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -46,7 +46,7 @@ public class TestConfig implements CommandLineRunner {
 		Candidate candidate3 = new Candidate(null, "Victor", "victor@gmail.com", "10988880000", "vetor987", "22233344455", 'M', null);
 		Candidate candidate4 = new Candidate(null, "Hudson", "hudson@gmail.com", "439000011111", "1928hud", "33344455566", 'M', null);
 		
-		Curriculum curr1 = new Curriculum(null, "desenvolvedor Backend", null, candidate1);
+		Curriculum curr1 = new Curriculum(null, "desenvolvedor Backend", "gosta de gatos", candidate1);
 		Curriculum curr2 = new Curriculum(null, "desenvolvedor Frontend", null, candidate2);
 
 		Professional professional1 = new Professional(null, "hacken", null, null, null, curr1);
@@ -72,8 +72,7 @@ public class TestConfig implements CommandLineRunner {
 		candidateRepo.saveAll(Arrays.asList(candidate1, candidate2, candidate3, candidate4));
 		companyRepo.saveAll(Arrays.asList(company1, company2));
 		adressRepo.saveAll(Arrays.asList(ender1, ender2, ender3, ender4, ender5, ender6, ender7));
-		curriculumRepo.saveAll(Arrays.asList(curr1, curr2));
-		
+		curriculumService.save(curr1);
+		curriculumService.save(curr2);
 	}
-
 }
