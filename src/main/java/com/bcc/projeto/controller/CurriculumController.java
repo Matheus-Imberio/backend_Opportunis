@@ -1,6 +1,7 @@
 package com.bcc.projeto.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,12 @@ public class CurriculumController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Curriculum> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(curriculumService.findById(id));
+	}
+	
+	@GetMapping(value = "/candidate/{candidateId}")
+	public ResponseEntity<List<Curriculum>> findAllByCandidateId(@PathVariable Long candidateId) {
+		List<Curriculum> curriculumns = curriculumService.findAllByCandidateId(candidateId);
+		return ResponseEntity.ok().body(curriculumns);
 	}
 	
 	// TODO update

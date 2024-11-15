@@ -1,5 +1,7 @@
 package com.bcc.projeto.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,10 @@ public class CurriculumService {
 	
 	public Curriculum findById(Long id) {
 		return curriculumRepo.findById(id);
+	}
+	
+	public List<Curriculum> findAllByCandidateId(Long candidateId) {
+		return curriculumRepo.findAllByCandidateId(candidateId);
 	}
 	
 	// TODO update
