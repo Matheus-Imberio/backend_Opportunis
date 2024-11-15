@@ -20,7 +20,7 @@ import com.bcc.projeto.entities.enums.Level;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
-import com.bcc.projeto.service.CurriculumService;
+import com.bcc.projeto.services.CurriculumService;
 
 @Configuration
 @Profile("dev")

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bcc.projeto.entities.Curriculum;
-import com.bcc.projeto.service.CurriculumService;
+import com.bcc.projeto.services.CurriculumService;
 
 @RestController
 @RequestMapping("/curriculum")

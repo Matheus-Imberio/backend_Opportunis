@@ -1,4 +1,4 @@
-package com.bcc.projeto.service;
+package com.bcc.projeto.services;
 
 import java.util.List;
 
