@@ -46,7 +46,7 @@ public class TestConfig implements CommandLineRunner {
 		Candidate candidate3 = new Candidate(null, "Victor", "victor@gmail.com", "10988880000", "vetor987", "22233344455", 'M', null);
 		Candidate candidate4 = new Candidate(null, "Hudson", "hudson@gmail.com", "439000011111", "1928hud", "33344455566", 'M', null);
 		
-		Curriculum curr1 = new Curriculum(null, "desenvolvedor Backend", null, candidate1);
+		Curriculum curr1 = new Curriculum(null, "desenvolvedor Backend", "gosta de gatos", candidate1);
 		Curriculum curr2 = new Curriculum(null, "desenvolvedor Frontend", null, candidate2);
 
 		Professional professional1 = new Professional(null, "hacken", null, null, null, curr1);

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,24 +24,23 @@ public class Curriculum implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "curriculum_id")
 	private Long id;
 	private String professionalGoal;
 	private String additionalInfo;
 	
-	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curriculum", cascade = CascadeType.REMOVE)
 	private List<Professional> professionalExperiences = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curriculum", cascade = CascadeType.REMOVE)
 	private List<AcademicBackground> academicBackgroundExperience = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curriculum", cascade = CascadeType.REMOVE)
 	private List<Course> coursesExperiences = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curriculum", cascade = CascadeType.REMOVE)
 	private List<Language> languages = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curriculum", cascade = CascadeType.REMOVE)
 	private List<Skill> skills = new ArrayList<>();
 	
 	@ManyToOne

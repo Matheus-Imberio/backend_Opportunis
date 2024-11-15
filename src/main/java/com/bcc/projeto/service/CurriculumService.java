@@ -1,7 +1,5 @@
 package com.bcc.projeto.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +13,11 @@ public class CurriculumService {
 	private CurriculumRepository curriculumRepo;
 	
 	
-	public void save(Curriculum curriculum) {
-		curriculumRepo.save(curriculum);
+	public Curriculum save(Curriculum curriculum) {
+		return curriculumRepo.save(curriculum);
 	}
 	
-	public List<Curriculum> findAll() {
-		return curriculumRepo.findAll();
-	}
+	// TODO find by id
+	// TODO update
+	// TODO delete
 }
