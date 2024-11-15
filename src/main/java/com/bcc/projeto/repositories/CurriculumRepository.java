@@ -39,6 +39,10 @@ public class CurriculumRepository {
 		return query.getResultList();
 	}
 	
-	// TODO update
+	@Transactional
+	public Curriculum update(Curriculum curriculum) {
+		return entityManager.merge(curriculum);
+	}
+	
 	// TODO delete
 }

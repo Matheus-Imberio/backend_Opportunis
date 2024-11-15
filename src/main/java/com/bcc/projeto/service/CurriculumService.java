@@ -37,6 +37,13 @@ public class CurriculumService {
 		return curriculumRepo.findAllByCandidateId(candidateId);
 	}
 	
-	// TODO update
+	public Curriculum update(Long id, Curriculum curriculum) {
+		Curriculum obj = curriculumRepo.findById(id);
+		
+		obj.setAdditionalInfo(curriculum.getAdditionalInfo());
+		obj.setProfessionalGoal(curriculum.getProfessionalGoal());
+		
+		return curriculumRepo.update(obj);
+	}
 	// TODO delete
 }
