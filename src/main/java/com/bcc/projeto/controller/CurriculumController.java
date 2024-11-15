@@ -2,6 +2,8 @@ package com.bcc.projeto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,11 @@ public class CurriculumController {
 		return ResponseEntity.ok(savedCurriculum);
 	}
 	
-	// TODO find by id
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Curriculum> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(curriculumService.findById(id));
+	}
+	
 	// TODO update
 	// TODO delete
 }

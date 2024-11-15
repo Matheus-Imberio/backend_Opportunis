@@ -21,7 +21,10 @@ public class CurriculumRepository {
 		return curriculum;
 	}
 	
-	// TODO find by id
+	public Curriculum findById(Long id) {
+		return entityManager.find(Curriculum.class, id);
+	}
+	
 	// TODO update
 	// TODO delete
 }

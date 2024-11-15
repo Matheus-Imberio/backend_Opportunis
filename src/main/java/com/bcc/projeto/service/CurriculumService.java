@@ -17,7 +17,10 @@ public class CurriculumService {
 		return curriculumRepo.save(curriculum);
 	}
 	
-	// TODO find by id
+	public Curriculum findById(Long id) {
+		return curriculumRepo.findById(id);
+	}
+	
 	// TODO update
 	// TODO delete
 }
