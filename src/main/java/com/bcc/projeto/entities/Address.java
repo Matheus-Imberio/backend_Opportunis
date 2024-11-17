@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "tb_address")
 public class Address implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -30,12 +32,12 @@ public class Address implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
-	private Profile owner;
+	private User owner;
 	
 	
 	public Address() {}
 
-	public Address(Long id, String street, String number, String district, String city, String cep, String complement, Profile owner) {
+	public Address(Long id, String street, String number, String district, String city, String cep, String complement, User owner) {
 		super();
 		this.id = id;
 		this.street = street;
@@ -104,11 +106,11 @@ public class Address implements Serializable {
 		this.complement = complement;
 	}
 
-	public Profile getOwner() {
+	public User getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Profile owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 

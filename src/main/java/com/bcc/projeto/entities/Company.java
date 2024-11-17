@@ -1,10 +1,10 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.bcc.projeto.entities.enums.Roles;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -13,8 +13,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_company")
 @PrimaryKeyJoinColumn(name = "company_id")
-public class Company extends Profile {
+public class Company extends User {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String socialName;
@@ -23,7 +24,7 @@ public class Company extends Profile {
 	private String site;
 	private String companySector;
 	private String nationality;
-	private final Integer role = Roles.Enterprise.ordinal();
+
 	
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
@@ -101,7 +102,6 @@ public class Company extends Profile {
 		return vacancies;
 	}
 
-	public Integer getRole() {return role; }
 
 	@Override
 	public int hashCode() {

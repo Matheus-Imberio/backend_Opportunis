@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -12,6 +13,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Experience implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

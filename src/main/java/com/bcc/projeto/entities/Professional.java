@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.Table;
 @Table(name = "tb_professional")
 public class Professional extends Experience {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne

@@ -1,7 +1,11 @@
 package com.bcc.projeto.services;
 
+import com.bcc.projeto.dtos.CompanyDTO;
+import com.bcc.projeto.dtos.ResponseDTO;
 import com.bcc.projeto.entities.Administrator;
+import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.exceptions.DatabaseException;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.AdmRepository;
@@ -34,6 +38,18 @@ public class CompanyService {
         return repository.save(obj);
     }
 
+    public void insert(CompanyDTO companyDTO, String encryptedPassword) {
+        Company company = new Company();
+        company.setName(companyDTO.name());
+        company.setEmail(companyDTO.email());
+        company.setCnpj(companyDTO.cnpj());
+        company.setPassword(encryptedPassword);
+        company.setTelephone(companyDTO.telephone());
+        company.setRole(Roles.ENTERPRISE);
+        company.setCompanySector(companyDTO.category());
+        repository.save(company);
+    }
+
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(id);
@@ -56,6 +72,12 @@ public class CompanyService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
+    }
+
+    public ResponseDTO findByEmail(String email) {
+        Optional<Company> companyOptional = repository.findByEmailEquals(email);
+        Company company = companyOptional.orElseThrow(() -> new EntityNotFoundException("Company not found"));
+        return new ResponseDTO(company.getEmail());
     }
 
     private void updateData(Company entity, Company obj) {
