@@ -9,10 +9,7 @@ import java.util.Objects;
 import com.bcc.projeto.entities.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_candidate")
@@ -21,8 +18,10 @@ public class Candidate extends User {
 
 	@Serial
 	private static final long  serialVersionUID = 1L;
-	
+
+	@Column(unique = true)
 	private String cpf;
+
 	private char genre;
 	private Date birthDate;
 

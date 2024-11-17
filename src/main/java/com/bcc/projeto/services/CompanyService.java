@@ -6,7 +6,9 @@ import com.bcc.projeto.entities.Administrator;
 import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Company;
 import com.bcc.projeto.entities.enums.Roles;
+import com.bcc.projeto.exceptions.CNPJAlreadyInUseException;
 import com.bcc.projeto.exceptions.DatabaseException;
+import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.AdmRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
@@ -47,6 +49,16 @@ public class CompanyService {
         company.setTelephone(companyDTO.telephone());
         company.setRole(Roles.ENTERPRISE);
         company.setCompanySector(companyDTO.category());
+
+        Optional<Company> existingByEmail = repository.findByEmailEquals(company.getEmail());
+        if (existingByEmail.isPresent()) {
+            throw new EmailAlreadyInUseException("Email já está em uso: " + company.getEmail());
+        }
+
+        Optional<Company> existingByCnpj = repository.findBycnpjEquals(company.getCnpj());
+        if (existingByCnpj.isPresent()) {
+            throw new CNPJAlreadyInUseException("CNPJ já está em uso: " + company.getCnpj());
+        }
         repository.save(company);
     }
 

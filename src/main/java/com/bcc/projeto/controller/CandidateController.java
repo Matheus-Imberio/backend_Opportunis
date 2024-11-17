@@ -3,6 +3,7 @@ package com.bcc.projeto.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,7 @@ public class CandidateController {
 
 	@PostMapping
 	public ResponseEntity<Candidate> insert(@RequestBody Candidate obj) {
+		obj.setRole(Roles.CANDIDATE);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);

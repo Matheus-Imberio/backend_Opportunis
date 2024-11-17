@@ -30,7 +30,10 @@ public abstract class User implements Serializable, UserDetails {
 
 	@Column(unique = true)
 	private String email;
+
+	@Column(unique = true)
 	private String telephone;
+
 	private String password;
 	private Roles role;
 

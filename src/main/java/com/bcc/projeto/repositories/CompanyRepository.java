@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     Optional<Company> findByEmailEquals(String email);
+    Optional<Company> findBycnpjEquals(String cpf);
 }
