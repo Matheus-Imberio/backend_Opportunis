@@ -1,29 +1,24 @@
 package com.bcc.projeto.entities;
 
-import com.bcc.projeto.entities.enums.Roles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
-import java.util.ArrayList;
+import java.io.Serial;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_adm")
 @PrimaryKeyJoinColumn(name = "adm_id")
-public class Administrator extends Profile {
+public class Administrator extends User {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String cpf;
     private char genre;
     private Date birthDate;
-    private final Integer role = Roles.Admin.ordinal();
-
     public Administrator() {
     }
 
@@ -59,7 +54,6 @@ public class Administrator extends Profile {
         this.birthDate = birthDate;
     }
 
-    public Integer getRole() {return role; }
     @Override
     public int hashCode() {
         final int prime = 31;

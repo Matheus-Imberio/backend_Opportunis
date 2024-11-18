@@ -1,14 +1,17 @@
 package com.bcc.projeto.services;
 
+import com.bcc.projeto.dtos.CandidateDTO;
+import com.bcc.projeto.dtos.ResponseDTO;
 import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.exceptions.DatabaseException;
-import com.bcc.projeto.exceptions.ResourceNotFoundException;
+import com.bcc.projeto.entities.enums.Roles;
+import com.bcc.projeto.exceptions.*;
 import com.bcc.projeto.repositories.CandidateRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +23,7 @@ public class CandidateService {
     private CandidateRepository repository;
 
     public List<Candidate> findAll() {
-        return repository.findAll();
+            return repository.findAll();
     }
 
     public Candidate findById(Long id) {
@@ -28,8 +31,32 @@ public class CandidateService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Candidate  insert(Candidate obj) {
+    public Candidate  insert(Candidate obj) throws EmailAlreadyInUseException, CPFAlreadyInUseException, TelephoneAlreadyInUseException {
+        Optional<Candidate> existingByEmail = repository.findByEmailEquals(obj.getEmail());
+        if (existingByEmail.isPresent()) {
+            throw new EmailAlreadyInUseException("Email já está em uso: " + obj.getEmail());
+        }
+        Optional<Candidate> existingByCPF = repository.findBycpf(obj.getCpf());
+        if (existingByCPF.isPresent()) {
+            throw new CPFAlreadyInUseException("CPF já está em uso: " + obj.getCpf());
+        }
+        Optional<Candidate> existingByTelephone = repository.findBytelephone(obj.getTelephone());
+        if (existingByTelephone.isPresent()) {
+            throw new TelephoneAlreadyInUseException("Telefone já está em uso: " + obj.getTelephone());
+        }
         return repository.save(obj);
+    }
+
+    public void insert(CandidateDTO candidateDTO, String encryptedPassword) {
+        Candidate candidate = new Candidate();
+        candidate.setName(candidateDTO.name());
+        candidate.setEmail(candidateDTO.email());
+        candidate.setTelephone(candidateDTO.telephone());
+        candidate.setCpf(candidateDTO.cpf());
+        candidate.setRole(Roles.CANDIDATE);
+        candidate.setGenre(candidateDTO.genre());
+        candidate.setPassword(encryptedPassword);
+        repository.save(candidate);
     }
 
     public void delete(Long id) {
@@ -65,4 +92,9 @@ public class CandidateService {
         entity.setPassword(obj.getPassword());
     }
 
+    public ResponseDTO findByEmail(String email) {
+        Optional<Candidate> candidateOptional = repository.findByEmailEquals(email);
+        Candidate candidate = candidateOptional.orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
+        return new ResponseDTO(candidate.getEmail());
+    }
 }

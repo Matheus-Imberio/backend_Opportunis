@@ -1,11 +1,8 @@
 package com.bcc.projeto.services;
 
 import com.bcc.projeto.entities.Administrator;
-import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.exceptions.DatabaseException;
-import com.bcc.projeto.exceptions.ResourceNotFoundException;
+import com.bcc.projeto.exceptions.*;
 import com.bcc.projeto.repositories.AdmRepository;
-import com.bcc.projeto.repositories.CandidateRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,9 +27,7 @@ public class AdministratorService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Administrator insert(Administrator obj) {
-        return repository.save(obj);
-    }
+    public Administrator insert(Administrator obj){return repository.save(obj);}
 
     public void delete(Long id) {
         if (!repository.existsById(id)) {

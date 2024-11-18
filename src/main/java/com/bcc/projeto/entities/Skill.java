@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ import jakarta.persistence.Table;
 @Table(name = "tb_skill")
 public class Skill implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

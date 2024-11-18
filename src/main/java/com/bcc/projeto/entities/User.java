@@ -1,42 +1,87 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import com.bcc.projeto.entities.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "tb_profile")
+@Table(name = "tb_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Profile implements Serializable {
+public abstract class User implements Serializable, UserDetails {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+
+	@Column(unique = true)
 	private String email;
+
+	@Column(unique = true)
 	private String telephone;
+
 	private String password;
-	
+	private Roles role;
+
 	@OneToMany(mappedBy = "owner")
-	private List<Address> addresses = new ArrayList<>();
+	private final List<Address> addresses = new ArrayList<>();
+
+	public Roles getRole() {
+		return role;
+	}
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == Roles.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_CANDIDATE"), new SimpleGrantedAuthority("ROLE_COMPANY"));
+		else if (this.role == Roles.CANDIDATE) return List.of(new SimpleGrantedAuthority("ROLE_CANDIDATE"));
+		return List.of(new SimpleGrantedAuthority("ROLE_COMPANY"));
+	}
+
+	@Override
+	public String getUsername() {
+		return null;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return UserDetails.super.isAccountNonExpired();
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return UserDetails.super.isAccountNonLocked();
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return UserDetails.super.isCredentialsNonExpired();
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return UserDetails.super.isEnabled();
+	}
+
+	public User() {}
 	
-	public Profile() {}
-	
-	public Profile(Long id, String name, String email, String telephone, String password) {
+	public User(Long id, String name, String email, String telephone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -107,14 +152,14 @@ public abstract class Profile implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Profile other = (Profile) obj;
+		User other = (User) obj;
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(telephone, other.telephone);
 	}
 	
 	@Override
 	public String toString() {
-		return "Profile [id=" + id + ", name=" + name + ", email=" + email + ", telephone=" + telephone + ", password="
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", telephone=" + telephone + ", password="
 				+ password + "]";
 	}	
 }

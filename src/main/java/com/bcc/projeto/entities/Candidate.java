@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,32 +9,31 @@ import java.util.Objects;
 import com.bcc.projeto.entities.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_candidate")
 @PrimaryKeyJoinColumn(name = "candidate_id")
-public class Candidate extends Profile {
+public class Candidate extends User {
 
-	private static final long serialVersionUID = 1L;
-	
+	@Serial
+	private static final long  serialVersionUID = 1L;
+
+	@Column(unique = true)
 	private String cpf;
+
 	private char genre;
 	private Date birthDate;
 
 	@OneToMany(mappedBy = "candidate")
-	private List<Candidature> candidatures = new ArrayList<>();
+	private final List<Candidature> candidatures = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
-	private List<Feedback> feedbacks = new ArrayList<>();	
+	private final List<Feedback> feedbacks = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "candidate")
 	private List<Curriculum> curriculumns = new ArrayList<>();
-	private final Integer role = Roles.Candidate.ordinal();
-	
+
 	public Candidate() {}
 
 	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre,
@@ -83,7 +83,6 @@ public class Candidate extends Profile {
 		return curriculumns;
 	}
 
-	public Integer getRole() {return role; }
 
 	@Override
 	public int hashCode() {
