@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,15 +28,19 @@ public class ProfessionalController {
 		return ResponseEntity.ok().body(body);
 	}
 	
-	@PostMapping(value = "/professional-experiences/curriculum/{curriculumId}")
+	@PostMapping(value = "/professional-experience/curriculum/{curriculumId}")
 	public ResponseEntity<Professional> insertIntoCurriculumById(@PathVariable Long curriculumId, @RequestBody Professional professional) {
 		Professional body = professionalService.insertIntoCurriculumById(curriculumId, professional);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(body.getId()).toUri();
 		return ResponseEntity.created(uri).body(body);
 	}
 	
-	// TODO insert
-	// TODO inserIntoCurriculumById
+	@PutMapping(value = "/professional-experience/{id}")
+	public ResponseEntity<Professional> update(@PathVariable Long id, @RequestBody Professional professional) {
+		Professional body = professionalService.update(id, professional);
+		return ResponseEntity.ok().body(body);
+	}
+	
 	// TODO update
 	// TODO delete
 }

@@ -36,8 +36,17 @@ public class ProfessionalService {
 		return body;
 	}
 	
-	// TODO insert
-	// TODO inserIntoCurriculumById
+	@Transactional
+	public Professional update(Long id, Professional newObj) {
+		 Professional obj = professionalRepo.findById(id).orElseThrow();
+		 
+		 obj.setOrganization(newObj.getOrganization());
+		 obj.setDescription(newObj.getDescription());
+		 obj.setDateBegin(newObj.getDateBegin());
+		 obj.setDateEnd(newObj.getDateEnd());
+		 
+		 return professionalRepo.save(obj);
+	}
 	// TODO update
 	// TODO delete
 }
