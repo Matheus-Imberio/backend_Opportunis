@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class ProfessionalController {
 	
 	@PostMapping(value = "/professional-experience/curriculum/{curriculumId}")
 	public ResponseEntity<Professional> insertIntoCurriculumById(@PathVariable Long curriculumId, @RequestBody Professional professional) {
-		Professional body = professionalService.insertIntoCurriculumById(curriculumId, professional);
+		Professional body = professionalService.insertByCurriculumId(curriculumId, professional);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(body.getId()).toUri();
 		return ResponseEntity.created(uri).body(body);
 	}
@@ -41,6 +42,9 @@ public class ProfessionalController {
 		return ResponseEntity.ok().body(body);
 	}
 	
-	// TODO update
-	// TODO delete
+	@DeleteMapping(value = "/professional-experience/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		professionalService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

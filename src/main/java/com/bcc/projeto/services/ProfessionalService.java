@@ -29,7 +29,7 @@ public class ProfessionalService {
 	}
 	
 	@Transactional
-	public Professional insertIntoCurriculumById(Long curriculumId, Professional professional) {
+	public Professional insertByCurriculumId(Long curriculumId, Professional professional) {
 		Curriculum curr = curriculumRepo.findById(curriculumId);
 		professional.setCurriculum(curr);
 		Professional body = professionalRepo.save(professional);
@@ -47,6 +47,8 @@ public class ProfessionalService {
 		 
 		 return professionalRepo.save(obj);
 	}
-	// TODO update
-	// TODO delete
+	
+	public void delete(Long id) {
+		professionalRepo.deleteById(id);
+	}
 }
