@@ -16,15 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bcc.projeto.entities.Curriculum;
-import com.bcc.projeto.service.CurriculumService;
+import com.bcc.projeto.services.CurriculumService;
 
 @RestController
 @RequestMapping("/curriculum")
 public class CurriculumController {
 
+	private final CurriculumService curriculumService;
+
 	@Autowired
-	private CurriculumService curriculumService;
-	
+	public CurriculumController(CurriculumService curriculumService) {
+		this.curriculumService = curriculumService;
+	}
+
 	@PostMapping
 	public ResponseEntity<Curriculum> save(@RequestBody Curriculum curriculum) {
 		Curriculum savedCurriculum = curriculumService.save(curriculum);

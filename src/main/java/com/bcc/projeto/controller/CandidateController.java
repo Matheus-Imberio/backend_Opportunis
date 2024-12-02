@@ -1,32 +1,47 @@
 package com.bcc.projeto.controller;
 
 import java.net.URI;
-import java.util.List;
+import java.util.Optional;
 
 import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.repositories.CandidateRepository;
 
 @RestController
 @RequestMapping("/candidates")
 public class CandidateController {
 
-	@Autowired
-	private CandidateService service;
+	private final CandidateService service;
 
-	@GetMapping
-	public ResponseEntity<List<Candidate>> findAll() {
-		List<Candidate> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+	@Autowired
+	public CandidateController(CandidateService service) {
+		this.service = service;
 	}
 
+	@GetMapping
+	public ResponseEntity<Page<Candidate>> findAll(
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "4") Integer linesPerPage,
+			@RequestParam(defaultValue = "ASC") String direction,
+			@RequestParam(defaultValue = "name") String orderBy) {
+		try {
+			Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+			Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
+
+			return ResponseEntity.ok().body(service.findAll(pageRequest));
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Candidate> FindById(@PathVariable Long id) {
 		Candidate obj = service.findById(id);

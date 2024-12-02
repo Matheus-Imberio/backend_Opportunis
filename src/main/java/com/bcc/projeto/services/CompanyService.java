@@ -13,9 +13,12 @@ import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.AdmRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +27,15 @@ import java.util.Optional;
 @Service
 public class CompanyService {
 
-    @Autowired
-    private CompanyRepository repository;
+    private final CompanyRepository repository;
 
-    public List<Company> findAll() {
-        return repository.findAll();
+    @Autowired
+    public CompanyService(CompanyRepository repository) {
+        this.repository = repository;
+    }
+
+    public Page<Company> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Company findById(Long id) {
@@ -36,10 +43,12 @@ public class CompanyService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    @Transactional
     public Company insert(Company obj) {
         return repository.save(obj);
     }
 
+    @Transactional
     public void insert(CompanyDTO companyDTO, String encryptedPassword) {
         Company company = new Company();
         company.setName(companyDTO.name());
@@ -62,6 +71,7 @@ public class CompanyService {
         repository.save(company);
     }
 
+    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(id);
@@ -76,6 +86,7 @@ public class CompanyService {
         }
     }
 
+    @Transactional
     public Company update(Long id, Company obj) {
         try {
             Company entity = repository.getReferenceById(id);
@@ -93,6 +104,8 @@ public class CompanyService {
     }
 
     private void updateData(Company entity, Company obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
         entity.setSocialName(obj.getSocialName());
         entity.setCnpj(obj.getCnpj());
         entity.setQtdEmployee(obj.getQtdEmployee());

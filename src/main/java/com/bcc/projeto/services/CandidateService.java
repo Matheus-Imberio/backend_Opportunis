@@ -7,23 +7,28 @@ import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.exceptions.*;
 import com.bcc.projeto.repositories.CandidateRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CandidateService {
 
-    @Autowired
-    private CandidateRepository repository;
+    private final CandidateRepository repository;
 
-    public List<Candidate> findAll() {
-            return repository.findAll();
+    @Autowired
+    public CandidateService(CandidateRepository repository) {
+        this.repository = repository;
+    }
+
+    public Page<Candidate> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Candidate findById(Long id) {
@@ -31,6 +36,7 @@ public class CandidateService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    @Transactional
     public Candidate  insert(Candidate obj) throws EmailAlreadyInUseException, CPFAlreadyInUseException, TelephoneAlreadyInUseException {
         Optional<Candidate> existingByEmail = repository.findByEmailEquals(obj.getEmail());
         if (existingByEmail.isPresent()) {
@@ -47,6 +53,7 @@ public class CandidateService {
         return repository.save(obj);
     }
 
+    @Transactional
     public void insert(CandidateDTO candidateDTO, String encryptedPassword) {
         Candidate candidate = new Candidate();
         candidate.setName(candidateDTO.name());
@@ -59,6 +66,7 @@ public class CandidateService {
         repository.save(candidate);
     }
 
+    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(id);
@@ -72,7 +80,7 @@ public class CandidateService {
             throw new DatabaseException(e.getMessage());
         }
     }
-
+    @Transactional
     public Candidate update(Long id, Candidate obj) {
         try {
             Candidate entity = repository.getReferenceById(id);
@@ -82,9 +90,9 @@ public class CandidateService {
             throw new ResourceNotFoundException(id);
         }
     }
-
     private void updateData(Candidate entity, Candidate obj) {
         entity.setName(obj.getName());
+        entity.setGenre(obj.getGenre());
         entity.setEmail(obj.getEmail());
         entity.setTelephone(obj.getTelephone());
         entity.setBirthDate(obj.getBirthDate());

@@ -1,4 +1,4 @@
-package com.bcc.projeto.service;
+package com.bcc.projeto.services;
 
 import java.util.List;
 
@@ -13,12 +13,16 @@ import com.bcc.projeto.repositories.CurriculumRepository;
 @Service
 public class CurriculumService {
 	
-	@Autowired
-	private CurriculumRepository curriculumRepo;
+	private final CurriculumRepository curriculumRepo;
 	
+	private final CandidateRepository candidateRepo;
+
 	@Autowired
-	private CandidateRepository candidateRepo;
-	
+	public CurriculumService(CurriculumRepository curriculumRepo, CandidateRepository candidateRepo) {
+		this.curriculumRepo = curriculumRepo;
+		this.candidateRepo = candidateRepo;
+	}
+
 	public Curriculum save(Curriculum curriculum) {
 		return curriculumRepo.save(curriculum);
 	}
