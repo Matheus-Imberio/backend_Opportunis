@@ -7,23 +7,40 @@ import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
 import com.bcc.projeto.exceptions.TelephoneAlreadyInUseException;
 import com.bcc.projeto.services.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admins")
 public class AdminController{
+    private final AdministratorService service;
+
     @Autowired
-    private AdministratorService service;
+    public AdminController(AdministratorService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public ResponseEntity<List<Administrator>> findAll() {
-        List<Administrator> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<Page<Administrator>> findAll(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "4") Integer linesPerPage,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy) {
+        try {
+            Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+            Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
+
+            return ResponseEntity.ok().body(service.findAll(pageRequest));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping(value = "/{id}")

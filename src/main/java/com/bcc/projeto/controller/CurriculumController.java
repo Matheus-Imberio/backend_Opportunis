@@ -22,9 +22,13 @@ import com.bcc.projeto.services.CurriculumService;
 @RequestMapping("/curriculum")
 public class CurriculumController {
 
+	private final CurriculumService curriculumService;
+
 	@Autowired
-	private CurriculumService curriculumService;
-	
+	public CurriculumController(CurriculumService curriculumService) {
+		this.curriculumService = curriculumService;
+	}
+
 	@PostMapping
 	public ResponseEntity<Curriculum> save(@RequestBody Curriculum curriculum) {
 		Curriculum savedCurriculum = curriculumService.save(curriculum);

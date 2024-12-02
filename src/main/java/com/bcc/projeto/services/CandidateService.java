@@ -12,30 +12,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-import java.awt.print.Pageable;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CandidateService {
 
-    @Autowired
-    private CandidateRepository repository;
+    private final CandidateRepository repository;
 
-    @Transactional
-    public Page<Candidate> findAll(Pageable pageable) {
-            return repository.findAll((org.springframework.data.domain.Pageable) pageable);
+    @Autowired
+    public CandidateService(CandidateRepository repository) {
+        this.repository = repository;
     }
 
-    @Transactional
+    public Page<Candidate> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
     public Candidate findById(Long id) {
         Optional<Candidate> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
+
     @Transactional
     public Candidate  insert(Candidate obj) throws EmailAlreadyInUseException, CPFAlreadyInUseException, TelephoneAlreadyInUseException {
         Optional<Candidate> existingByEmail = repository.findByEmailEquals(obj.getEmail());
@@ -52,6 +52,7 @@ public class CandidateService {
         }
         return repository.save(obj);
     }
+
     @Transactional
     public void insert(CandidateDTO candidateDTO, String encryptedPassword) {
         Candidate candidate = new Candidate();
@@ -65,6 +66,7 @@ public class CandidateService {
         repository.save(candidate);
     }
 
+    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(id);
@@ -90,13 +92,14 @@ public class CandidateService {
     }
     private void updateData(Candidate entity, Candidate obj) {
         entity.setName(obj.getName());
+        entity.setGenre(obj.getGenre());
         entity.setEmail(obj.getEmail());
         entity.setTelephone(obj.getTelephone());
         entity.setBirthDate(obj.getBirthDate());
         entity.setCpf(obj.getCpf());
         entity.setPassword(obj.getPassword());
     }
-    @Transactional
+
     public ResponseDTO findByEmail(String email) {
         Optional<Candidate> candidateOptional = repository.findByEmailEquals(email);
         Candidate candidate = candidateOptional.orElseThrow(() -> new EntityNotFoundException("Candidate not found"));

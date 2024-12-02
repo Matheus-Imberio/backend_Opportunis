@@ -1,9 +1,14 @@
 package com.bcc.projeto.controller;
 
+import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Company;
 import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,15 +20,28 @@ import java.util.List;
 @RequestMapping("/companies")
 public class CompanyController {
 
-    @Autowired
-    private CompanyService service;
+    private final CompanyService service;
 
-    @GetMapping
-    public ResponseEntity<List<Company>> findAll() {
-        List<Company> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+    @Autowired
+    public CompanyController(CompanyService service) {
+        this.service = service;
     }
 
+    @GetMapping
+    public ResponseEntity<Page<Company>> findAll(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "4") Integer linesPerPage,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy) {
+        try {
+            Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+            Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
+
+            return ResponseEntity.ok().body(service.findAll(pageRequest));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Company> FindById(@PathVariable Long id) {
         Company obj = service.findById(id);

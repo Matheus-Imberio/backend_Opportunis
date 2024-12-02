@@ -1,13 +1,14 @@
 package com.bcc.projeto.controller;
 
-import java.awt.print.Pageable;
 import java.net.URI;
+import java.util.Optional;
 
 import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +20,28 @@ import com.bcc.projeto.entities.Candidate;
 @RequestMapping("/candidates")
 public class CandidateController {
 
-	@Autowired
-	private CandidateService service;
+	private final CandidateService service;
 
-	public ResponseEntity<Page<Candidate>> findAll(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "4") Integer linesPerPage, @RequestParam(defaultValue = "ASC") String direction, @RequestParam(defaultValue = "username") String orderBy) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-		return ResponseEntity.ok().body(service.findAll((Pageable) pageRequest));
+	@Autowired
+	public CandidateController(CandidateService service) {
+		this.service = service;
 	}
 
+	@GetMapping
+	public ResponseEntity<Page<Candidate>> findAll(
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "4") Integer linesPerPage,
+			@RequestParam(defaultValue = "ASC") String direction,
+			@RequestParam(defaultValue = "name") String orderBy) {
+		try {
+			Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+			Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
+
+			return ResponseEntity.ok().body(service.findAll(pageRequest));
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Candidate> FindById(@PathVariable Long id) {
 		Candidate obj = service.findById(id);
