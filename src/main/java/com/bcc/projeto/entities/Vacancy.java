@@ -30,6 +30,7 @@ public class Vacancy implements Serializable {
 	private String description;
 	private float wage;
 	private int qtdCandidate;
+	private boolean activate = true;
 	
 	@ManyToOne
 	@JoinColumn(name = "company_id")
@@ -110,6 +111,10 @@ public class Vacancy implements Serializable {
 	public List<Candidature> getCandidatures() {
 		return candidatures;
 	}
+
+	public boolean isActivate() {return activate;}
+
+	public void setActivate(boolean activate) {this.activate = activate;}
 
 	@Override
 	public int hashCode() {
