@@ -23,26 +23,26 @@ public class AcademicBackgroundController {
 	@Autowired
 	private AcademicBackgroundService academicBackgroundService;
 	
-	@GetMapping(value = "/curriculumns/{curriculumId}/academic-background-experiences")
+	@GetMapping(value = "/curriculumns/{curriculumId}/academic-backgrounds")
 	public ResponseEntity<List<AcademicBackground>> findAllbyCurriculumId(@PathVariable Long curriculumId) {
 		List<AcademicBackground> body = academicBackgroundService.findAllByCurriculumId(curriculumId);
 		return ResponseEntity.ok().body(body);
 	}
 	
-	@PostMapping(value = "/curriculumns/{curriculumId}/academic-background-experiences")
+	@PostMapping(value = "/curriculumns/{curriculumId}/academic-backgrounds")
 	public ResponseEntity<AcademicBackground> insertByCurriculumId(@PathVariable Long curriculumId, @RequestBody AcademicBackground obj) {
 		AcademicBackground body = academicBackgroundService.insertByCurriculumId(curriculumId, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(body.getId()).toUri();
 		return ResponseEntity.created(uri).body(body);
 	}
 	
-	@PutMapping(value = "/curriculumns/academic-background-experiences/{id}")
+	@PutMapping(value = "/curriculumns/academic-backgrounds/{id}")
 	public ResponseEntity<AcademicBackground> update(@PathVariable Long id, @RequestBody AcademicBackground obj) {
 		AcademicBackground body = academicBackgroundService.update(id, obj);
 		return ResponseEntity.ok().body(body);
 	}
 	
-	@DeleteMapping(value = "/curriculumns/academic-background-experiences/{id}")
+	@DeleteMapping(value = "/curriculumns/academic-backgrounds/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		academicBackgroundService.delete(id);
 		return ResponseEntity.noContent().build();
