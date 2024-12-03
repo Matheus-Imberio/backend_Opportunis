@@ -23,26 +23,26 @@ public class ProfessionalController {
 	@Autowired
 	private ProfessionalService professionalService;
 	
-	@GetMapping(value = "/professional-experiences/curriculum/{curriculumId}")
+	@GetMapping(value = "/curriculumns/{curriculumId}/professional-experiences")
 	public ResponseEntity<List<Professional>> findAllbyCurriculumId(@PathVariable Long curriculumId) {
 		List<Professional> body = professionalService.findAllByCurriculumId(curriculumId);
 		return ResponseEntity.ok().body(body);
 	}
 	
-	@PostMapping(value = "/professional-experience/curriculum/{curriculumId}")
-	public ResponseEntity<Professional> insertIntoCurriculumById(@PathVariable Long curriculumId, @RequestBody Professional professional) {
+	@PostMapping(value = "/curriculumns/{curriculumId}/professional-experiences")
+	public ResponseEntity<Professional> insertByCurriculumId(@PathVariable Long curriculumId, @RequestBody Professional professional) {
 		Professional body = professionalService.insertByCurriculumId(curriculumId, professional);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(body.getId()).toUri();
 		return ResponseEntity.created(uri).body(body);
 	}
 	
-	@PutMapping(value = "/professional-experience/{id}")
+	@PutMapping(value = "/curriculumns/professional-experiences/{id}")
 	public ResponseEntity<Professional> update(@PathVariable Long id, @RequestBody Professional professional) {
 		Professional body = professionalService.update(id, professional);
 		return ResponseEntity.ok().body(body);
 	}
 	
-	@DeleteMapping(value = "/professional-experience/{id}")
+	@DeleteMapping(value = "/curriculumns/professional-experiences/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		professionalService.delete(id);
 		return ResponseEntity.noContent().build();
