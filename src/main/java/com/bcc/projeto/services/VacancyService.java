@@ -1,5 +1,6 @@
 package com.bcc.projeto.services;
 
+import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.Vacancy;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.VacancyRepository;
@@ -15,9 +16,13 @@ import java.util.Optional;
 public class VacancyService {
 
     private final VacancyRepository repository;
+    private final CategoryService service;
 
     @Autowired
-    public VacancyService(VacancyRepository repository) {this.repository = repository;}
+    public VacancyService(VacancyRepository vacancyRepository, CategoryService categoryService) {
+        this.repository = vacancyRepository;
+        this.service = categoryService;
+    }
 
     public Page<Vacancy> findAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -47,6 +52,11 @@ public class VacancyService {
         Vacancy entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         updateData(entity, obj);
         return repository.save(entity);
+    }
+
+    public Page<Vacancy> findByCategory(Long categoryId, Pageable pageable) {
+        Category category = service.findById(categoryId);
+        return repository.findByCategory(category, pageable);
     }
 
     private void updateData(Vacancy entity, Vacancy obj) {

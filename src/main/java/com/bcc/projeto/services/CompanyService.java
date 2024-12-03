@@ -2,15 +2,12 @@ package com.bcc.projeto.services;
 
 import com.bcc.projeto.dtos.CompanyDTO;
 import com.bcc.projeto.dtos.ResponseDTO;
-import com.bcc.projeto.entities.Administrator;
-import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.entities.*;
 import com.bcc.projeto.entities.enums.Roles;
 import com.bcc.projeto.exceptions.CNPJAlreadyInUseException;
 import com.bcc.projeto.exceptions.DatabaseException;
 import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
-import com.bcc.projeto.repositories.AdmRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -21,17 +18,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CompanyService {
 
     private final CompanyRepository repository;
+    private final CategoryService service;
 
     @Autowired
-    public CompanyService(CompanyRepository repository) {
+    public CompanyService(CompanyRepository repository, CategoryService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     public Page<Company> findAll(Pageable pageable) {
@@ -101,6 +99,11 @@ public class CompanyService {
         Optional<Company> companyOptional = repository.findByEmailEquals(email);
         Company company = companyOptional.orElseThrow(() -> new EntityNotFoundException("Company not found"));
         return new ResponseDTO(company.getEmail());
+    }
+
+    public Page<Company> findByCategory(Long categoryId, Pageable pageable) {
+        Category category = service.findById(categoryId);
+        return repository.findByCategory(category, (java.awt.print.Pageable) pageable);
     }
 
     private void updateData(Company entity, Company obj) {

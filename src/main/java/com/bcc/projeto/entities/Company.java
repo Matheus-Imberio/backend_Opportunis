@@ -25,7 +25,12 @@ public class Company extends User {
 	private String companySector;
 	private String nationality;
 
-	
+	@ManyToMany
+	@JoinTable(name = "company_category",
+			joinColumns = @JoinColumn(name = "company_id"),
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private final List<Category> categories = new ArrayList<>();
+
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
 	
@@ -130,4 +135,8 @@ public class Company extends User {
 		return "Company [socialName=" + socialName + ", cnpj=" + cnpj + ", qtdEmployee=" + qtdEmployee + ", site="
 				+ site + ", companySector=" + companySector + ", nationality=" + nationality + "]";
 	}
+
+    public List<Category> getCategories() {
+        return categories;
+    }
 }
