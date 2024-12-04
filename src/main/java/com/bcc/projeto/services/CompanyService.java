@@ -103,7 +103,7 @@ public class CompanyService {
 
     public Page<Company> findByCategory(Long categoryId, Pageable pageable) {
         Category category = service.findById(categoryId);
-        return repository.findByCategory(category, (java.awt.print.Pageable) pageable);
+        return repository.findByCategory(category, pageable);
     }
 
     private void updateData(Company entity, Company obj) {

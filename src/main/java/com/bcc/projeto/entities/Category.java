@@ -21,8 +21,7 @@ public class Category implements Serializable{
 
     @OneToMany(mappedBy = "category")
     private final List<Vacancy> vacancies = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "category")
     private final List<Company> companies = new ArrayList<>();
 
     public Category() {
