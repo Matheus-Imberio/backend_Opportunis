@@ -14,7 +14,7 @@ public class Company extends User {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
-	
+
 	private String socialName;
 
 	@Column(unique = true)
@@ -25,23 +25,21 @@ public class Company extends User {
 	private String companySector;
 	private String nationality;
 
-	@ManyToMany
-	@JoinTable(name = "company_category",
-			joinColumns = @JoinColumn(name = "company_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private final List<Category> categories = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Vacancy> vacancies = new ArrayList<>();
-	
-	
+
+
 	public Company() {}
 
 	public Company(Long id, String name, String email, String telephone, String password,
-			String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
+				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
@@ -50,7 +48,7 @@ public class Company extends User {
 		this.companySector = companySector;
 		this.nationality = nationality;
 	}
-	
+
 	public String getSocialName() {
 		return socialName;
 	}
@@ -98,11 +96,11 @@ public class Company extends User {
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
-	
+
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
-	
+
 	public List<Vacancy> getVacancies() {
 		return vacancies;
 	}
@@ -135,8 +133,4 @@ public class Company extends User {
 		return "Company [socialName=" + socialName + ", cnpj=" + cnpj + ", qtdEmployee=" + qtdEmployee + ", site="
 				+ site + ", companySector=" + companySector + ", nationality=" + nationality + "]";
 	}
-
-    public List<Category> getCategories() {
-        return categories;
-    }
 }
