@@ -1,6 +1,6 @@
+
 package com.bcc.projeto.controller;
 
-import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.Company;
 import com.bcc.projeto.entities.enums.Roles;
@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
 
     private final CompanyService service;
+    private final CategoryService categoryService;
 
     @Autowired
-    public CompanyController(CompanyService service) {
+    public CompanyController(CompanyService service, CategoryService categoryService) {
         this.service = service;
+        this.categoryService = categoryService;
     }
+
 
     @GetMapping
     public ResponseEntity<Page<Company>> findAll(
@@ -51,8 +52,9 @@ public class CompanyController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @GetMapping
+    @GetMapping("/category/{id}")
     public ResponseEntity<Page<Company>> findByCategory(
+            @PathVariable Long id,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "4") Integer linesPerPage,
             @RequestParam(defaultValue = "ASC") String direction,
@@ -60,7 +62,7 @@ public class CompanyController {
         try {
             Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
             Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
-            //Optional<Category> obj =
+            Category obj = categoryService.findById(id);
             return ResponseEntity.ok().body(service.findByCategory(obj.getId(), pageRequest));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
