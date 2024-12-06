@@ -1,41 +1,45 @@
 package com.bcc.projeto.entities;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.bcc.projeto.entities.enums.Roles;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_company")
 @PrimaryKeyJoinColumn(name = "company_id")
-public class Company extends Profile {
+public class Company extends User {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
-	
+
 	private String socialName;
+
+	@Column(unique = true)
 	private String cnpj;
+
 	private int qtdEmployee;
 	private String site;
 	private String companySector;
 	private String nationality;
-	private final Integer role = Roles.Enterprise.ordinal();
-	
+
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Vacancy> vacancies = new ArrayList<>();
-	
-	
+
+
 	public Company() {}
 
 	public Company(Long id, String name, String email, String telephone, String password,
-			String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
+				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
@@ -44,7 +48,7 @@ public class Company extends Profile {
 		this.companySector = companySector;
 		this.nationality = nationality;
 	}
-	
+
 	public String getSocialName() {
 		return socialName;
 	}
@@ -92,16 +96,15 @@ public class Company extends Profile {
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
-	
+
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
-	
+
 	public List<Vacancy> getVacancies() {
 		return vacancies;
 	}
 
-	public Integer getRole() {return role; }
 
 	@Override
 	public int hashCode() {

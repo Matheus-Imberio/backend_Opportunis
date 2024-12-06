@@ -1,34 +1,34 @@
 package com.bcc.projeto.controller;
 
-import com.bcc.projeto.entities.Administrator;
+import com.bcc.projeto.entities.Candidate;
+import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.enums.Roles;
-import com.bcc.projeto.exceptions.CPFAlreadyInUseException;
-import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
-import com.bcc.projeto.exceptions.TelephoneAlreadyInUseException;
-import com.bcc.projeto.services.AdministratorService;
+import com.bcc.projeto.services.CandidateService;
+import com.bcc.projeto.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-@RestController
-@RequestMapping("/admins")
-public class AdminController{
-    private final AdministratorService service;
+@Controller
+@RequestMapping("/categories")
+public class CategoryController {
+    private final CategoryService service;
 
     @Autowired
-    public AdminController(AdministratorService service) {
+    public CategoryController(CategoryService service) {
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<Page<Administrator>> findAll(
+    public ResponseEntity<Page<Category>> findAll(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "4") Integer linesPerPage,
             @RequestParam(defaultValue = "ASC") String direction,
@@ -42,16 +42,14 @@ public class AdminController{
             return ResponseEntity.badRequest().build();
         }
     }
-
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Administrator> FindById(@PathVariable Long id) {
-        Administrator obj = service.findById(id);
+    public ResponseEntity<Category> FindById(@PathVariable Long id) {
+        Category obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Administrator> insert(@RequestBody Administrator obj) throws CPFAlreadyInUseException, EmailAlreadyInUseException, TelephoneAlreadyInUseException{
-        obj.setRole(Roles.ADMIN);
+    public ResponseEntity<Category> insert(@RequestBody Category obj) {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
@@ -64,7 +62,7 @@ public class AdminController{
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Administrator> update(@PathVariable Long id,@RequestBody Administrator obj){
+    public ResponseEntity<Category> update(@PathVariable Long id,@RequestBody Category obj){
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }

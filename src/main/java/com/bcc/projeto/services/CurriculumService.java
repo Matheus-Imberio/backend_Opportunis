@@ -16,6 +16,11 @@ import com.bcc.projeto.repositories.LanguageRepository;
 import com.bcc.projeto.repositories.ProfessionalRepository;
 import com.bcc.projeto.repositories.SkillRepository;
 
+import com.bcc.projeto.entities.Candidate;
+import com.bcc.projeto.entities.Curriculum;
+import com.bcc.projeto.repositories.CandidateRepository;
+import com.bcc.projeto.repositories.CurriculumRepository;
+
 @Service
 public class CurriculumService {
 	

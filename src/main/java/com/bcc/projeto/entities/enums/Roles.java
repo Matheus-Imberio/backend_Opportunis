@@ -1,7 +1,17 @@
 package com.bcc.projeto.entities.enums;
 
 public enum Roles {
-    Admin,
-    Enterprise,
-    Candidate
+    ADMIN("admin"),
+    ENTERPRISE("enterprise"),
+    CANDIDATE("candidate");
+
+    private final String role;
+
+    Roles(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
 }
