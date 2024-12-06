@@ -30,6 +30,7 @@ public class Vacancy implements Serializable {
 	private String description;
 	private float wage;
 	private int qtdCandidate;
+	private boolean activate = true;
 	
 	@ManyToOne
 	@JoinColumn(name = "company_id")
@@ -37,11 +38,12 @@ public class Vacancy implements Serializable {
 	
 	@OneToMany(mappedBy = "vacancy")
 	private List<Candidature> candidatures = new ArrayList<>();
-	
-	
-	public Vacancy() {}
 
-	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate) {
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
+	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category) {
 		super();
 		this.id = id;
 		this.goal = goal;
@@ -49,6 +51,11 @@ public class Vacancy implements Serializable {
 		this.description = description;
 		this.wage = wage;
 		this.qtdCandidate = qtdCandidate;
+        this.category = category;
+    }
+
+	public Vacancy() {
+
 	}
 
 	public Long getId() {
@@ -111,6 +118,10 @@ public class Vacancy implements Serializable {
 		return candidatures;
 	}
 
+	public boolean isActivate() {return activate;}
+
+	public void setActivate(boolean activate) {this.activate = activate;}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, goal, id, qtdCandidate, requirements, wage);
@@ -136,4 +147,12 @@ public class Vacancy implements Serializable {
 		return "Vacancy [id=" + id + ", goal=" + goal + ", requirements=" + requirements + ", description="
 				+ description + ", wage=" + wage + ", qtdCandidate=" + qtdCandidate + "]";
 	}
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
