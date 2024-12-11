@@ -1,19 +1,7 @@
 package com.bcc.projeto.services;
 
-import java.util.List;
 import java.util.Optional;
 
-import com.bcc.projeto.dtos.CompanyDTO;
-import com.bcc.projeto.dtos.ResponseDTO;
-import com.bcc.projeto.entities.*;
-import com.bcc.projeto.entities.enums.Roles;
-import com.bcc.projeto.exceptions.CNPJAlreadyInUseException;
-import com.bcc.projeto.exceptions.DatabaseException;
-import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
-import com.bcc.projeto.exceptions.ResourceNotFoundException;
-import com.bcc.projeto.repositories.CompanyRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,13 +9,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.bcc.projeto.dtos.CompanyDTO;
+import com.bcc.projeto.dtos.ResponseDTO;
+import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.entities.enums.Roles;
+import com.bcc.projeto.exceptions.CNPJAlreadyInUseException;
 import com.bcc.projeto.exceptions.DatabaseException;
+import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.CompanyRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-import java.util.Optional;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CompanyService {

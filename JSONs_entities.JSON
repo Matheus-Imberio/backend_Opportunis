@@ -1,0 +1,78 @@
+candidate
+{
+    "name": "Joao",
+    "email": "joao@email.com",
+    "telephone": "44911112222",
+    "password": "joao123",
+    "cpf": "11122233344",
+    "genre": "M",
+    "birthDate": null,
+    "candidatures": [],
+    "feedbacks": [],
+    "curriculumns": []
+}
+
+curriculum
+{
+  "professionalGoal": "Desenvolvedor Junior",
+  "additionalInfo": "Disponível para mudança de cidade",
+  "professionalExperiences": [],
+  "academicBackgroundExperience": [],
+  "coursesExperiences": [],
+  "languages": [],
+  "skills": []
+}
+
+curriculum completo
+{
+  "professionalGoal": "Desenvolvedor Full Stack Pleno",
+  "additionalInfo": "Só aceito remoto",
+  "professionalExperiences": [
+        {
+            "organization": "Magalu Cloud",
+            "description": "Trabalhei como desenvolvedor pleno",
+            "dateBegin": null,
+            "dateEnd": null
+        },
+        {
+            "organization": "VIP Tech",
+            "description": "Trabalhei como estagiario e posteriormente como desenvolvedor junior",
+            "dateBegin": null,
+            "dateEnd": null
+        }
+  ],
+  "academicBackgroundExperience": [
+        {
+            "organization": "UTFPR",
+            "description": "Cursei BBC",
+            "dateBegin": null,
+            "dateEnd": null  
+        }
+  ],
+  "coursesExperiences": [
+        {
+            "organization": "Alura",
+            "description": "Curso de desenvolvimento WEB",
+            "dateBegin": null,
+            "dateEnd": null
+        },
+        {
+            "organization": "Udemy",
+            "description": "Curso de desenvolvimento Back-end",
+            "dateBegin": null,
+            "dateEnd": null
+        }
+  ],
+  "languages": [
+        {
+            "language": "English",
+            "level": "FLUENT"
+        }
+  ],
+  "skills": [
+        {
+            "name": "nadar de costas"
+        }
+  ]
+}
+

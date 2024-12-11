@@ -1,0 +1,16 @@
+======================CANDIDATES==========================
+POST 	- inserir novo candidato						-> "http://localhost:8080/candidates"
+
+
+======================CURRICULUMNS==========================
+POST 	- inserir novo curriculum para um candidato		-> "http://localhost:8080/candidates/{candidateId}/curriculumns"
+		- inserir um novo curriculo !NÃO ESTÁ PRONTO!	-> "http://localhost:8080/candidates/curriculumns"
+
+GET 	- listar todos os curriculos de um candidato	-> "http://localhost:8080/candidates/{candidateId}/curriculumns"
+		- encontrar um curriculo específico				-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+PUT 	- atualizar um curriculo						-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+DELETE	- deletar um curriculo							-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+
