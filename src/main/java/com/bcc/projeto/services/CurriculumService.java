@@ -13,6 +13,7 @@ import com.bcc.projeto.entities.Curriculum;
 import com.bcc.projeto.entities.Language;
 import com.bcc.projeto.entities.Professional;
 import com.bcc.projeto.entities.Skill;
+import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.AcademicBackgroundRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CourseRepository;
@@ -47,6 +48,11 @@ public class CurriculumService {
 	
 	@Transactional
 	public Curriculum save(Curriculum curriculum) {
+		if (curriculum.getCandidate() == null)
+			throw new ResourceNotFoundException("O corpo do curriculum deve possuir um candidato válido");
+			
+		Candidate candidate = candidateRepo.findById(curriculum.getCandidate().getId()).orElseThrow(() -> new ResourceNotFoundException(curriculum.getCandidate().getId()));
+		candidate.getCurriculumns().add(curriculum);
 		saveCompositeModels(curriculum);
 		return curriculumRepo.save(curriculum);
 	}
