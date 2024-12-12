@@ -3,7 +3,6 @@ package com.bcc.projeto.repositories;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.bcc.projeto.entities.Curriculum;
 
@@ -17,7 +16,6 @@ public class CurriculumRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Transactional
 	public Curriculum save(Curriculum curriculum) {
 		entityManager.persist(curriculum);
 		entityManager.detach(curriculum);
@@ -29,7 +27,6 @@ public class CurriculumRepository {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	public List<Curriculum> findAllByCandidateId(Long candidateId) {
 		
 		Query query = entityManager.createNativeQuery("SELECT tb_curriculum.* FROM tb_curriculum "
@@ -39,14 +36,11 @@ public class CurriculumRepository {
 		return query.getResultList();
 	}
 	
-	@Transactional
 	public Curriculum update(Curriculum curriculum) {
 		return entityManager.merge(curriculum);
 	}
 	
-	@Transactional
-	public void delete(Long id) {
-		Curriculum obj = entityManager.find(Curriculum.class, id);
-		entityManager.remove(obj);
+	public void delete(Object entity) {
+		entityManager.remove(entity);
 	}
 }

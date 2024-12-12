@@ -76,11 +76,16 @@ public class CurriculumService {
 	}
 	
 	public List<Curriculum> findAllByCandidateId(Long candidateId) {
+		candidateRepo.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException(candidateId));
 		return curriculumRepo.findAllByCandidateId(candidateId);
 	}
 	
+	@Transactional
 	public Curriculum update(Long id, Curriculum curriculum) {
 		Curriculum obj = curriculumRepo.findById(id);
+		
+		if (obj == null)
+			throw new ResourceNotFoundException(id);
 		
 		obj.setAdditionalInfo(curriculum.getAdditionalInfo());
 		obj.setProfessionalGoal(curriculum.getProfessionalGoal());
@@ -88,8 +93,14 @@ public class CurriculumService {
 		return curriculumRepo.update(obj);
 	}
 	
+	@Transactional
 	public void delete(Long id) {
-		curriculumRepo.delete(id);
+		Curriculum obj = curriculumRepo.findById(id);
+		
+		if (obj == null)
+			throw new ResourceNotFoundException(id);
+		
+		curriculumRepo.delete(obj);
 	}
 	
 	private void saveCompositeModels(Curriculum curriculum) {
