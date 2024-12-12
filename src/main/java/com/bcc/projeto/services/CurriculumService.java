@@ -60,7 +60,7 @@ public class CurriculumService {
 	@Transactional
 	public Curriculum saveIntoCandidateById(Long candidateId, Curriculum curriculum) {
 		saveCompositeModels(curriculum);
-		Candidate candidate = candidateRepo.findById(candidateId).orElseThrow();
+		Candidate candidate = candidateRepo.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException(candidateId));
 		curriculum.setCandidate(candidate);
 		return curriculumRepo.save(curriculum);
 	}
