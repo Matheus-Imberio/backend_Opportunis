@@ -66,7 +66,13 @@ public class CurriculumService {
 	}
 	
 	public Curriculum findById(Long id) {
-		return curriculumRepo.findById(id);
+		 Curriculum body = curriculumRepo.findById(id);
+		
+		if (body != null)
+			return body;
+		else
+			throw new ResourceNotFoundException(id);
+		
 	}
 	
 	public List<Curriculum> findAllByCandidateId(Long candidateId) {
