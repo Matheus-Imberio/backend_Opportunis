@@ -1,0 +1,58 @@
+======================CANDIDATES==========================
+POST 	- inserir novo candidato						-> "http://localhost:8080/candidates"
+
+
+======================CURRICULUMNS==========================
+POST 	- inserir novo curriculum para um candidato		-> "http://localhost:8080/candidates/{candidateId}/curriculumns"
+		- inserir um novo curriculo !NÃO ESTÁ PRONTO!	-> "http://localhost:8080/candidates/curriculumns"
+
+GET 	- listar todos os curriculos de um candidato	-> "http://localhost:8080/candidates/{candidateId}/curriculumns"
+		- encontrar um curriculo específico				-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+PUT 	- atualizar um curriculo						-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+DELETE	- deletar um curriculo							-> "http://localhost:8080/candidates/curriculumns/{id}"
+
+
+======================CURRICULUMNS-PROFESSIONAL=============
+POST	- inserir nova experiencia professional			-> http://localhost:8080/curriculumns/{curriculumId}/professional-experiences
+
+GET		- listar todas as experiencias professionais	-> http://localhost:8080/curriculumns/{curriculumId}/professional-experiences
+		  de um curriculo.
+
+PUT		- atualizar uma experiencia profissioanl		-> http://localhost:8080/curriculumns/professional-experiences/{id}
+
+DELETE	- deleta uma experiencia profissional			-> http://localhost:8080/curriculumns/professional-experiences/{id}
+
+
+======================CURRICULUMNS-ACADEMIC-BACKGROUND=============
+POST	- inserir nova experiencia academica			-> http://localhost:8080/curriculumns/{curriculumId}/academic-backgrounds
+
+GET		- listar todas as experiencias academicas		-> http://localhost:8080/curriculumns/{curriculumId}/academic-backgrounds
+		  de um curriculo
+
+PUT		- atualizar uma experiencia academica			-> http://localhost:8080/curriculumns/academic-backgrounds/{id}
+
+DELETE	- deleta uma experiencia academica				-> http://localhost:8080/curriculumns/academic-backgrounds/{id}
+
+
+======================CURRICULUMNS-COURSES=============
+POST	- inserir novo curso							-> http://localhost:8080/curriculumns/{curriculumId}/courses
+
+GET		- listar todos os curso							-> http://localhost:8080/curriculumns/{curriculumId}/courses
+		  de um curriculo
+
+PUT		- atualizar um curso							-> http://localhost:8080/curriculumns/courses/{id}
+
+DELETE	- deleta um curso								-> http://localhost:8080/curriculumns/courses/{id}
+
+OBS: Para as classes Skill e Language, basta trocar o nome "courses" pelo equivalente (deve estar no plural)
+
+
+
+
+
+
+
+
+
