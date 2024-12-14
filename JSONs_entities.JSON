@@ -1,4 +1,3 @@
-candidate
 {
     "name": "Joao",
     "email": "joao@email.com",
@@ -12,7 +11,6 @@ candidate
     "curriculumns": []
 }
 
-curriculum
 {
   "professionalGoal": "Desenvolvedor Junior",
   "additionalInfo": "Disponível para mudança de cidade",
@@ -23,7 +21,6 @@ curriculum
   "skills": []
 }
 
-curriculum completo
 {
   "professionalGoal": "Desenvolvedor Full Stack Pleno",
   "additionalInfo": "Só aceito remoto",
@@ -76,3 +73,19 @@ curriculum completo
   ]
 }
 
+{
+	"name": "Concremam Materiais para Construção",
+	"email": "concremam@gmail.com",
+	"telephone": "4435681111",
+	"password": "concremam123",
+	"address": [],
+	"socialName": "CONCREMAM MATERIAIS PARA CONSTRUCAO LTDA",
+	"cnpj": "11222333000144",
+	"qtdEmplyee": 15,
+	"site": "www.concremam.com.br",
+	"companySector": "Materiais para construção",
+	"nationality": "Brasil",
+	"category": null,
+	"feedbacks": [],
+	"vacancies": []
+}
