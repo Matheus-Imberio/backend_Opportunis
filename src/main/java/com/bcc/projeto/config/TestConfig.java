@@ -34,10 +34,10 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		//getAllCompanyByCategoryTest();
+		//populateCompaniesAndCategories();
 	}
 	
-	private void getAllCompanyByCategoryTest() {
+	private void populateCompaniesAndCategories() {
 		Company com1 = new Company(
 				null,
 				"Coamo Agroindustrial",
