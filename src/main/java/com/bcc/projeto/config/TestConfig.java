@@ -54,9 +54,11 @@ public class TestConfig implements CommandLineRunner {
 		Vacancy vac1 = new Vacancy(null, "Tech Lead TI", null, null, 0, 0, null);
 		Vacancy vac2 = new Vacancy(null, "Desenvolvedor Front-end", null, null, 0, 0, null);
 		Vacancy vac3 = new Vacancy(null, "Desenvolvedor FullStack", null, null, 0, 0, null);
+		Vacancy vac4 = new Vacancy(null, "Scrum Master", null, null, 0, 0, null);
 		vacancyRepo.save(vac1);
 		vacancyRepo.save(vac2);
 		vacancyRepo.save(vac3);
+		vacancyRepo.save(vac4);
 		
 		Candidate c1 = new Candidate(null, "joão", "joao@gmail.com", "4491111111", "joao123", "11111111111", 'M', null);
 		Candidate c2 = new Candidate(null, "Maria", "maria@gmail.com", "44922222222", "maria123", "22222222222", 'F', null);
