@@ -1,5 +1,6 @@
 package com.bcc.projeto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -19,8 +20,10 @@ public class Category implements Serializable{
     private Long id;
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private final List<Vacancy> vacancies = new ArrayList<>();
+
     @OneToMany(mappedBy = "category")
     private final List<Company> companies = new ArrayList<>();
 
