@@ -25,8 +25,8 @@ public class Candidate extends User {
 	private char genre;
 	private Date birthDate;
 
-	@OneToMany(mappedBy = "candidate")
-	private final List<Candidature> candidatures = new ArrayList<>();
+	//@OneToMany(mappedBy = "candidate")
+	//private final List<Candidature> candidatures = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
 	private final List<Feedback> feedbacks = new ArrayList<>();
@@ -68,10 +68,10 @@ public class Candidate extends User {
 		this.birthDate = birthDate;
 	}
 
-	@JsonIgnore
-	public List<Candidature> getCandidatures() {
-		return candidatures;
-	}
+	//@JsonIgnore
+	//public List<Candidature> getCandidatures() {
+	//	return candidatures;
+	//}
 
 	@JsonIgnore
 	public List<Feedback> getFeedbacks() {

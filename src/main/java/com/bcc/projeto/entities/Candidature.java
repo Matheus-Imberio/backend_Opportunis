@@ -1,53 +1,48 @@
 package com.bcc.projeto.entities;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.bcc.projeto.entities.pk.CandidaturePk;
+
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_candidature")
 public class Candidature implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private Instant date;
-	
-	@ManyToOne
-	@JoinColumn(name = "candidate_id")
-	private Candidate candidate;
-	
-	@ManyToOne
-	@JoinColumn(name = "vacancy_id")
-	private Vacancy vacancy;
-	
+	@EmbeddedId
+	private CandidaturePk id;
+	private Instant date;	
 	
 	public Candidature() {}
 
-	public Candidature(Long id, Instant date) {
+	public Candidature(Instant date, Candidate candidate, Vacancy vacancy) {
 		super();
-		this.id = id;
 		this.date = date;
+		id.setCandidate(candidate);
+		id.setVacancy(vacancy);
 	}
-
-	public Long getId() {
-		return id;
+	
+	public Candidate getCandidate() {
+		return id.getCandidate();
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	
+	public void setCandidate(Candidate candidate) {
+		id.setCandidate(candidate);
+	}
+	
+	public Vacancy getVacancy() {
+		return id.getVacancy();
+	}
+	
+	public void setVacancy(Vacancy vacancy) {
+		id.setVacancy(vacancy);
 	}
 
 	public Instant getDate() {
@@ -57,26 +52,10 @@ public class Candidature implements Serializable {
 	public void setDate(Instant date) {
 		this.date = date;
 	}
-	
-	public Candidate getCandidate() {
-		return candidate;
-	}
-
-	public void setCandidate(Candidate candidate) {
-		this.candidate = candidate;
-	}
-
-	public Vacancy getVacancy() {
-		return vacancy;
-	}
-
-	public void setVacancy(Vacancy vacancy) {
-		this.vacancy = vacancy;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, id);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -88,11 +67,6 @@ public class Candidature implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Candidature other = (Candidature) obj;
-		return Objects.equals(date, other.date) && Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "Candidature [id=" + id + ", date=" + date + "]";
+		return Objects.equals(id, other.id);
 	}
 }
