@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +43,7 @@ public class Vacancy implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
+	@JsonBackReference
 	private Category category;
 
 	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category) {
