@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -92,12 +93,16 @@ public class CandidateService {
     }
     private void updateData(Candidate entity, Candidate obj) {
         entity.setName(obj.getName());
-        entity.setGenre(obj.getGenre());
+        if (obj.getGenre() != '\u0000') {
+            entity.setGenre(obj.getGenre());
+        }
         entity.setEmail(obj.getEmail());
         entity.setTelephone(obj.getTelephone());
         entity.setBirthDate(obj.getBirthDate());
         entity.setCpf(obj.getCpf());
-        entity.setPassword(obj.getPassword());
+        if (!Objects.equals(obj.getPassword(), "")) {
+            entity.setPassword(obj.getPassword());
+        }
     }
 
     public ResponseDTO findByEmail(String email) {

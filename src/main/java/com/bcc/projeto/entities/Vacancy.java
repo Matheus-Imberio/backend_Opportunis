@@ -38,7 +38,7 @@ public class Vacancy implements Serializable {
 	@JoinColumn(name = "company_id")
 	private Company company;
 	
-	@OneToMany(mappedBy = "vacancy")
+	@OneToMany(mappedBy = "id.vacancy")
 	private List<Candidature> candidatures = new ArrayList<>();
 
 	@ManyToOne
