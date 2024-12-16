@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -32,6 +33,7 @@ public class Company extends User {
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "company")
 	private List<Vacancy> vacancies = new ArrayList<>();
 
