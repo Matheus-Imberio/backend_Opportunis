@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.bcc.projeto.entities.pk.CandidaturePk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -17,7 +18,7 @@ public class Candidature implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private CandidaturePk id;
+	private CandidaturePk id = new CandidaturePk();
 	private Instant date;	
 	
 	public Candidature() {}
@@ -37,6 +38,7 @@ public class Candidature implements Serializable {
 		id.setCandidate(candidate);
 	}
 	
+	@JsonIgnore
 	public Vacancy getVacancy() {
 		return id.getVacancy();
 	}

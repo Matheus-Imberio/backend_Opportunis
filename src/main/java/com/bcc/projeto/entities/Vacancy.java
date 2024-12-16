@@ -36,8 +36,8 @@ public class Vacancy implements Serializable {
 	@JoinColumn(name = "company_id")
 	private Company company;
 	
-	//@OneToMany(mappedBy = "vacancy")
-	//private List<Candidature> candidatures = new ArrayList<>();
+	@OneToMany(mappedBy = "id.vacancy")
+	private List<Candidature> candidatures = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -114,9 +114,9 @@ public class Vacancy implements Serializable {
 		this.company = company;
 	}
 
-	//public List<Candidature> getCandidatures() {
-	//	return candidatures;
-	//}
+	public List<Candidature> getCandidatures() {
+		return candidatures;
+	}
 
 	public boolean isActivate() {return activate;}
 
