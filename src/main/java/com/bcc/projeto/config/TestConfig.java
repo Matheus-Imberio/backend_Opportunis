@@ -5,12 +5,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.bcc.projeto.entities.Candidate;
+import com.bcc.projeto.entities.Candidature;
 import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.Company;
+import com.bcc.projeto.entities.Vacancy;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
+import com.bcc.projeto.repositories.CandidatureRepository;
 import com.bcc.projeto.repositories.CategoryRepository;
 import com.bcc.projeto.repositories.CompanyRepository;
+import com.bcc.projeto.repositories.VacancyRepository;
 import com.bcc.projeto.services.CurriculumService;
 
 @Configuration
@@ -32,9 +37,40 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private CategoryRepository categoryRepo;
 	
+	@Autowired
+	private VacancyRepository vacancyRepo;
+	
+	@Autowired
+	private CandidatureRepository candidatureRepo;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		//populateCompaniesAndCategories();
+		seedCandidatures();
+	}
+	
+	private void seedCandidatures() {
+		
+		Vacancy vac1 = new Vacancy(null, "Tech Lead TI", null, null, 0, 0, null);
+		Vacancy vac2 = new Vacancy(null, "Desenvolvedor Front-end", null, null, 0, 0, null);
+		Vacancy vac3 = new Vacancy(null, "Desenvolvedor FullStack", null, null, 0, 0, null);
+		Vacancy vac4 = new Vacancy(null, "Scrum Master", null, null, 0, 0, null);
+		vacancyRepo.save(vac1);
+		vacancyRepo.save(vac2);
+		vacancyRepo.save(vac3);
+		vacancyRepo.save(vac4);
+		
+		Candidate c1 = new Candidate(null, "joão", "joao@gmail.com", "4491111111", "joao123", "11111111111", 'M', null);
+		Candidate c2 = new Candidate(null, "Maria", "maria@gmail.com", "44922222222", "maria123", "22222222222", 'F', null);
+		candidateRepo.save(c1);
+		candidateRepo.save(c2);
+		
+		Candidature can1 = new Candidature(null, c1, vac1);
+		Candidature can2 = new Candidature(null, c2, vac2);
+		Candidature can3 = new Candidature(null, c2, vac3);
+		candidatureRepo.save(can1);
+		candidatureRepo.save(can2);
+		candidatureRepo.save(can3);
 	}
 	
 	private void populateCompaniesAndCategories() {

@@ -6,10 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import com.bcc.projeto.entities.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_candidate")
@@ -25,7 +28,7 @@ public class Candidate extends User {
 	private char genre;
 	private Date birthDate;
 
-	@OneToMany(mappedBy = "candidate")
+	@OneToMany(mappedBy = "id.candidate")
 	private final List<Candidature> candidatures = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
@@ -69,8 +72,12 @@ public class Candidate extends User {
 	}
 
 	@JsonIgnore
-	public List<Candidature> getCandidatures() {
-		return candidatures;
+	public List<Vacancy> getVacancies() {
+		List<Vacancy> vacancies = new ArrayList<>();
+		for (Candidature c : candidatures) {
+			vacancies.add(c.getVacancy());
+		}
+		return vacancies;
 	}
 
 	@JsonIgnore
