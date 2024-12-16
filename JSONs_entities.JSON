@@ -1,0 +1,91 @@
+{
+    "name": "Joao",
+    "email": "joao@email.com",
+    "telephone": "44911112222",
+    "password": "joao123",
+    "cpf": "11122233344",
+    "genre": "M",
+    "birthDate": null,
+    "candidatures": [],
+    "feedbacks": [],
+    "curriculumns": []
+}
+
+{
+  "professionalGoal": "Desenvolvedor Junior",
+  "additionalInfo": "Disponível para mudança de cidade",
+  "professionalExperiences": [],
+  "academicBackgroundExperience": [],
+  "coursesExperiences": [],
+  "languages": [],
+  "skills": []
+}
+
+{
+  "professionalGoal": "Desenvolvedor Full Stack Pleno",
+  "additionalInfo": "Só aceito remoto",
+  "professionalExperiences": [
+        {
+            "organization": "Magalu Cloud",
+            "description": "Trabalhei como desenvolvedor pleno",
+            "dateBegin": null,
+            "dateEnd": null
+        },
+        {
+            "organization": "VIP Tech",
+            "description": "Trabalhei como estagiario e posteriormente como desenvolvedor junior",
+            "dateBegin": null,
+            "dateEnd": null
+        }
+  ],
+  "academicBackgroundExperience": [
+        {
+            "organization": "UTFPR",
+            "description": "Cursei BBC",
+            "dateBegin": null,
+            "dateEnd": null  
+        }
+  ],
+  "coursesExperiences": [
+        {
+            "organization": "Alura",
+            "description": "Curso de desenvolvimento WEB",
+            "dateBegin": null,
+            "dateEnd": null
+        },
+        {
+            "organization": "Udemy",
+            "description": "Curso de desenvolvimento Back-end",
+            "dateBegin": null,
+            "dateEnd": null
+        }
+  ],
+  "languages": [
+        {
+            "language": "English",
+            "level": "FLUENT"
+        }
+  ],
+  "skills": [
+        {
+            "name": "nadar de costas"
+        }
+  ]
+}
+
+{
+	"name": "Concremam Materiais para Construção",
+	"email": "concremam@gmail.com",
+	"telephone": "4435681111",
+	"password": "concremam123",
+	"address": [],
+	"socialName": "CONCREMAM MATERIAIS PARA CONSTRUCAO LTDA",
+	"cnpj": "11222333000144",
+	"qtdEmplyee": 15,
+	"site": "www.concremam.com.br",
+	"companySector": "Materiais para construção",
+	"nationality": "Brasil",
+	"category": null,
+	"feedbacks": [],
+	"vacancies": []
+}
