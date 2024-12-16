@@ -70,8 +70,8 @@ public class TestConfig implements CommandLineRunner {
 		
 		cat1.getCompanies().add(com2);
 		cat3.getCompanies().add(com1);
-		com2.setCategory(cat1);
-		com1.setCategory(cat3);
+		//com2.setCategory(cat1);
+		//com1.setCategory(cat3);
 		
 		categoryRepo.save(cat1);
 		categoryRepo.save(cat2);
