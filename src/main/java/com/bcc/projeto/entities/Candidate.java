@@ -23,12 +23,6 @@ public class Candidate extends User {
 	private String cpf;
 
 	private char genre;
-<<<<<<< Updated upstream
-
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate birthDate;
-=======
->>>>>>> Stashed changes
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
