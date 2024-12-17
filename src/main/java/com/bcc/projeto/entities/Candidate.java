@@ -23,11 +23,17 @@ public class Candidate extends User {
 	private String cpf;
 
 	private char genre;
+<<<<<<< Updated upstream
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate birthDate;
+=======
+>>>>>>> Stashed changes
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 
-	@OneToMany(mappedBy = "candidate")
+	@OneToMany(mappedBy = "id.candidate")
 	private final List<Candidature> candidatures = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
