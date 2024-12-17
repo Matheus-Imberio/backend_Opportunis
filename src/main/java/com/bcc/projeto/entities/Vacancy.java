@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +22,6 @@ import jakarta.persistence.Table;
 @Table(name = "tb_vacancy")
 public class Vacancy implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -32,11 +31,11 @@ public class Vacancy implements Serializable {
 	private float wage;
 	private int qtdCandidate;
 	private boolean activate = true;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
-	
+
 	@OneToMany(mappedBy = "id.vacancy")
 	private List<Candidature> candidatures = new ArrayList<>();
 
@@ -107,6 +106,7 @@ public class Vacancy implements Serializable {
 	public void setQtdCandidate(int qtdCandidate) {
 		this.qtdCandidate = qtdCandidate;
 	}
+
 
 	public Company getCompany() {
 		return company;

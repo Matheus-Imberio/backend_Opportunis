@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,10 +19,8 @@ public class Company extends User {
 	private static final long serialVersionUID = 1L;
 
 	private String socialName;
-
 	@Column(unique = true)
 	private String cnpj;
-
 	private int qtdEmployee;
 	private String site;
 	private String companySector;
@@ -32,11 +32,10 @@ public class Company extends User {
 	private Category category;
 
 	@OneToMany(mappedBy = "company")
-	private List<Feedback> feedbacks = new ArrayList<>();
-
-	@OneToMany(mappedBy = "company")
 	private List<Vacancy> vacancies = new ArrayList<>();
 
+	@OneToMany(mappedBy = "company")
+	private List<Feedback> feedbacks = new ArrayList<>();
 
 	public Company() {}
 
@@ -102,9 +101,13 @@ public class Company extends User {
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
-
+	@JsonIgnore
 	public List<Vacancy> getVacancies() {
 		return vacancies;
+	}
+
+	public Category getCategory() {
+		return category;
 	}
 
 
