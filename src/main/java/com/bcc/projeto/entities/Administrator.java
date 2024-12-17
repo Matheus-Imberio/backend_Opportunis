@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 
 import java.io.Serial;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
