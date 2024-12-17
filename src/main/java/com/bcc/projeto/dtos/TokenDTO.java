@@ -1,4 +1,4 @@
 package com.bcc.projeto.dtos;
 
-public record TokenDTO (String token, String role) {
+public record TokenDTO (String token, String role, String id) {
 }
