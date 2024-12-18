@@ -41,7 +41,7 @@ public class Vacancy implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	@JsonBackReference
+        @JsonManagedReference
 	private Category category;
 
 	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category) {
