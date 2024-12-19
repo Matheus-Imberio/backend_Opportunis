@@ -29,6 +29,7 @@ public class CandidatureService {
 	
 	@Transactional
 	public Candidature insert(Candidature candidature) {
+		candidature.getVacancy().addCandidate();
 		return candidatureRepo.save(candidature);
 	}
 	

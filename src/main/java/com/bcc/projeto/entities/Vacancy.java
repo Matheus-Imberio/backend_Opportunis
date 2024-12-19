@@ -109,6 +109,10 @@ public class Vacancy implements Serializable {
 	public void setQtdCandidate(int qtdCandidate) {
 		this.qtdCandidate = qtdCandidate;
 	}
+	
+	public void addCandidate() {
+		qtdCandidate++;
+	}
 
 	public Company getCompany() {
 		return company;
