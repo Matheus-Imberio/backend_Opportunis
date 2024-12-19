@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,11 @@ public class CandidatureController {
 	public ResponseEntity<List<Candidature>> findAllByVacancyId(@PathVariable Long id) {
 		List<Candidature> candidatures = candidatureService.findAllByVacancyId(id);
 		return ResponseEntity.ok().body(candidatures);
+	}
+	
+	@DeleteMapping(value = "/{candidateId}/{vacancyId}")
+	public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long vacancyId) {
+		candidatureService.delete(candidateId, vacancyId);
+		return ResponseEntity.noContent().build();
 	}
 }

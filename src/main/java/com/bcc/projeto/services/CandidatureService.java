@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Candidature;
+import com.bcc.projeto.entities.Vacancy;
+import com.bcc.projeto.entities.pk.CandidaturePk;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CandidatureRepository;
@@ -37,5 +40,12 @@ public class CandidatureService {
 	public List<Candidature> findAllByVacancyId(Long id) {
 		vacancyRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));		
 		return candidatureRepo.findAllByVacancyId(id);
+	}
+	
+	@Transactional
+	public void delete(Long candidateId, Long vacancyId) {
+		Candidate candidate = candidateRepo.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException(candidateId));
+		Vacancy vacancy = vacancyRepo.findById(vacancyId).orElseThrow(() -> new ResourceNotFoundException(vacancyId));
+		candidatureRepo.deleteById(new CandidaturePk(candidate, vacancy));
 	}
 }
