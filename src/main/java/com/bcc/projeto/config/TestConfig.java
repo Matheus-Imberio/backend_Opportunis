@@ -54,13 +54,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		Company comp1 = new Company(null, "COAMO", null, null, null, "Coamo", "11111111000111", 345, null, "Agroindustrial", "Brasil");
 		companyRepo.save(comp1);
-		
+
 		Vacancy vac1 = new Vacancy(null, "Tech Lead TI", null, null, 0, 0, null);
 		Vacancy vac2 = new Vacancy(null, "Desenvolvedor Front-end", null, null, 0, 0, null);
 		Vacancy vac3 = new Vacancy(null, "Desenvolvedor FullStack", null, null, 0, 0, null);
 		Vacancy vac4 = new Vacancy(null, "Scrum Master", null, null, 0, 0, null);
-		vac1.setCompany(comp1);
-		vac4.setCompany(comp1);
 		vacancyRepo.save(vac1);
 		vacancyRepo.save(vac2);
 		vacancyRepo.save(vac3);

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Vacancy;
+
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Embeddable;
@@ -56,7 +57,7 @@ public class CandidaturePk implements Serializable {
 	public int hashCode() {
 		return Objects.hash(candidate, vacancy);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

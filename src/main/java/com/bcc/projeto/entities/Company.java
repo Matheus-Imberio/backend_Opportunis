@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
@@ -29,6 +30,7 @@ public class Company extends User {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
+	@JsonBackReference
 	private Category category;
 
 	@OneToMany(mappedBy = "company")

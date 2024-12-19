@@ -27,7 +27,8 @@ public class AuthController {
         var auth = authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
         var role = String.valueOf(((User) auth.getPrincipal()).getRole());
-        return ResponseEntity.ok(new TokenDTO(token, role));
+        var id = String.valueOf(((User) auth.getPrincipal()).getId());
+        return ResponseEntity.ok(new TokenDTO(token, role, id));
     }
 
     @PostMapping("/candidate-register")
