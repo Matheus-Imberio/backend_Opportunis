@@ -38,10 +38,10 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
-   @PostMapping("/company-register")
+    @PostMapping("/company-register")
     public ResponseEntity<Void> companyRegister(@RequestBody CompanyDTO data) {
         if (authService.loadUserByUsername(data.email()) != null) return ResponseEntity.badRequest().build();
         authService.companySignUp(data);
         return ResponseEntity.ok().build();
     }
-    }
+}
