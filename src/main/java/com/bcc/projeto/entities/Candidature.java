@@ -23,13 +23,21 @@ public class Candidature implements Serializable {
 	
 	public Candidature() {}
 
-	public Candidature(Instant date, Candidate candidate, Vacancy vacancy) {
+	public Candidature(CandidaturePk id, Instant date) {
 		super();
+		this.id = id;
 		this.date = date;
-		id.setCandidate(candidate);
-		id.setVacancy(vacancy);
 	}
 	
+	public CandidaturePk getId() {
+		return id;
+	}
+	
+	public void setId(CandidaturePk id) {
+		this.id = id;
+	}
+	
+	@JsonIgnore
 	public Candidate getCandidate() {
 		return id.getCandidate();
 	}

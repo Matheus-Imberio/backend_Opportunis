@@ -49,8 +49,13 @@ DELETE	- deleta um curso								-> http://localhost:8080/curriculumns/courses/{i
 OBS: Para as classes Skill e Language, basta trocar o nome "courses" pelo equivalente (deve estar no plural)
 
 
+======================CANDIDATURES=========================
+POST    - fazer candidatura                             -> http://localhost:8080/candidatures
 
+GET     - listar candidaturas de um candidato           -> http://localhost:8080/candidatures/candidate/{id}
+        - listar candidaturas de uma vaga               -> http://localhost:8080/candidatures/vacancy/{id}
 
+DELETE  - cancelar uma candidatura                      -> http://localhost:8080/candidatures/{id}
 
 
 

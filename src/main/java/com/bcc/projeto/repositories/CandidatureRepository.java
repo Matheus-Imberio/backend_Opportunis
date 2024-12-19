@@ -1,6 +1,9 @@
 package com.bcc.projeto.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.bcc.projeto.entities.Candidature;
 import com.bcc.projeto.entities.pk.CandidaturePk;
@@ -8,7 +11,6 @@ import com.bcc.projeto.entities.pk.CandidaturePk;
 
 public interface CandidatureRepository extends JpaRepository<Candidature, CandidaturePk> {
 	
-	//List<Candidature> findByVacancy(Vacancy vacancy);
-	
-	//List<Candidature> findByCandidate(Candidate candidate);
+	@Query("FROM Candidature c WHERE c.id.candidate.id = :id")
+	List<Candidature> findAllByCandidateId(Long id);
 }
