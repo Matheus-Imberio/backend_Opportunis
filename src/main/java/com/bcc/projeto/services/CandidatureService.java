@@ -42,6 +42,11 @@ public class CandidatureService {
 		return candidatureRepo.findAllByVacancyId(id);
 	}
 	
+	public Candidature findById(CandidaturePk id) {
+		return candidatureRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(
+				"candidate id: " + id.getCandidate().getId().toString() + " vacancy id: " + id.getVacancy().getId().toString()));
+	}
+	
 	@Transactional
 	public void delete(Long candidateId, Long vacancyId) {
 		Candidate candidate = candidateRepo.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException(candidateId));

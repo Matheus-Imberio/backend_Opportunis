@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bcc.projeto.entities.Candidature;
+import com.bcc.projeto.entities.pk.CandidaturePk;
 import com.bcc.projeto.services.CandidatureService;
 
 @RestController
@@ -29,6 +30,7 @@ public class CandidatureController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(candidature);
 	}
 	
+	// Acho que esse método deveria estar no controller de candidato!
 	@GetMapping(value = "/candidate/{id}")
 	public ResponseEntity<List<Candidature>> findAllByCandidateId(@PathVariable Long id) {
 		List<Candidature> candidatures = candidatureService.findAllByCandidateId(id);
@@ -39,6 +41,12 @@ public class CandidatureController {
 	public ResponseEntity<List<Candidature>> findAllByVacancyId(@PathVariable Long id) {
 		List<Candidature> candidatures = candidatureService.findAllByVacancyId(id);
 		return ResponseEntity.ok().body(candidatures);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Candidature> findById(@RequestBody CandidaturePk id) {
+		Candidature body = candidatureService.findById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(body);
 	}
 	
 	@DeleteMapping(value = "/{candidateId}/{vacancyId}")
