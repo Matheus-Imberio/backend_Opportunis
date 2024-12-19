@@ -89,3 +89,26 @@
 	"feedbacks": [],
 	"vacancies": []
 }
+
+// candidatura
+{
+    "id": {
+        "candidate": {
+            "id": 1
+        },
+        "vacancy": {
+            "id": 4
+        }
+    },
+    "date": null
+}
+
+// Id de candidatura
+{
+    "candidate": {
+        "id": 1
+    },
+    "vacancy": {
+        "id": 4
+    }
+}

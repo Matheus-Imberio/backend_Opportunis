@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -103,6 +105,7 @@ public class Company extends User {
 		return feedbacks;
 	}
 
+	@JsonIgnore
 	public List<Vacancy> getVacancies() {
 		return vacancies;
 	}
