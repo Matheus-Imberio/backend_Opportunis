@@ -68,8 +68,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		Candidate c1 = new Candidate(null, "joão", "joao@gmail.com", "4491111111", "joao123", "11111111111", 'M', null);
 		Candidate c2 = new Candidate(null, "Maria", "maria@gmail.com", "44922222222", "maria123", "22222222222", 'F', null);
+		Candidate c3 = new Candidate(null, "Pedro", "pedro@gmail.com", "4493333333", "pedro123", "33333333333", 'M', null);
 		candidateRepo.save(c1);
 		candidateRepo.save(c2);
+		candidateRepo.save(c3);
 		
 		CandidaturePk pk1 = new CandidaturePk(c1, vac1);
 		Candidature can1 = new Candidature(pk1, null);
@@ -77,9 +79,12 @@ public class TestConfig implements CommandLineRunner {
 		Candidature can2 = new Candidature(pk2, null);
 		CandidaturePk pk3 = new CandidaturePk(c2, vac3);
 		Candidature can3 = new Candidature(pk3, null);
+		CandidaturePk pk4 = new CandidaturePk(c3, vac3);
+		Candidature can4 = new Candidature(pk4, null);
 		candidatureRepo.save(can1);
 		candidatureRepo.save(can2);
 		candidatureRepo.save(can3);
+		candidatureRepo.save(can4);
 	}
 	
 	private void populateCompaniesAndCategories() {

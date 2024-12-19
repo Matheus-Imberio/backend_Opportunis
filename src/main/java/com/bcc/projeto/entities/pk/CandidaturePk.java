@@ -34,7 +34,7 @@ public class CandidaturePk implements Serializable {
 		this.vacancy = vacancy;
 	}
 
-	@JsonIncludeProperties({"id"})
+	@JsonIncludeProperties({"id", "name"})
 	public Candidate getCandidate() {
 		return candidate;
 	}
@@ -43,6 +43,7 @@ public class CandidaturePk implements Serializable {
 		this.candidate = candidate;
 	}
 	
+	@JsonIncludeProperties({"id", "goal"})
 	public Vacancy getVacancy() {
 		return vacancy;
 	}

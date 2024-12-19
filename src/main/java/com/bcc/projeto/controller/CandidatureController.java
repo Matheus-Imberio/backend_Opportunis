@@ -33,4 +33,10 @@ public class CandidatureController {
 		List<Candidature> candidatures = candidatureService.findAllByCandidateId(id);
 		return ResponseEntity.ok().body(candidatures);
 	}
+	
+	@GetMapping(value = "/vacancy/{id}")
+	public ResponseEntity<List<Candidature>> findAllByVacancyId(@PathVariable Long id) {
+		List<Candidature> candidatures = candidatureService.findAllByVacancyId(id);
+		return ResponseEntity.ok().body(candidatures);
+	}
 }

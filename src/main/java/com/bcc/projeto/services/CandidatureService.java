@@ -10,6 +10,7 @@ import com.bcc.projeto.entities.Candidature;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CandidatureRepository;
+import com.bcc.projeto.repositories.VacancyRepository;
 
 @Service
 public class CandidatureService {
@@ -20,6 +21,9 @@ public class CandidatureService {
 	@Autowired
 	private CandidateRepository candidateRepo;
 	
+	@Autowired
+	private VacancyRepository vacancyRepo;
+	
 	@Transactional
 	public Candidature insert(Candidature candidature) {
 		return candidatureRepo.save(candidature);
@@ -28,5 +32,10 @@ public class CandidatureService {
 	public List<Candidature> findAllByCandidateId(Long id) {
 		candidateRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));		
 		return candidatureRepo.findAllByCandidateId(id);
-	}	
+	}
+	
+	public List<Candidature> findAllByVacancyId(Long id) {
+		vacancyRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));		
+		return candidatureRepo.findAllByVacancyId(id);
+	}
 }
