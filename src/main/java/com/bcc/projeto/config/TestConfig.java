@@ -10,6 +10,7 @@ import com.bcc.projeto.entities.Candidature;
 import com.bcc.projeto.entities.Category;
 import com.bcc.projeto.entities.Company;
 import com.bcc.projeto.entities.Vacancy;
+import com.bcc.projeto.entities.pk.CandidaturePk;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CandidatureRepository;
@@ -51,6 +52,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	private void seedCandidatures() {
 		
+		Company comp1 = new Company(null, "COAMO", null, null, null, "Coamo", "11111111000111", 345, null, "Agroindustrial", "Brasil");
+		companyRepo.save(comp1);
+
 		Vacancy vac1 = new Vacancy(null, "Tech Lead TI", null, null, 0, 0, null);
 		Vacancy vac2 = new Vacancy(null, "Desenvolvedor Front-end", null, null, 0, 0, null);
 		Vacancy vac3 = new Vacancy(null, "Desenvolvedor FullStack", null, null, 0, 0, null);
@@ -62,15 +66,23 @@ public class TestConfig implements CommandLineRunner {
 		
 		Candidate c1 = new Candidate(null, "joão", "joao@gmail.com", "4491111111", "joao123", "11111111111", 'M', null);
 		Candidate c2 = new Candidate(null, "Maria", "maria@gmail.com", "44922222222", "maria123", "22222222222", 'F', null);
+		Candidate c3 = new Candidate(null, "Pedro", "pedro@gmail.com", "4493333333", "pedro123", "33333333333", 'M', null);
 		candidateRepo.save(c1);
 		candidateRepo.save(c2);
+		candidateRepo.save(c3);
 		
-		Candidature can1 = new Candidature(null, c1, vac1);
-		Candidature can2 = new Candidature(null, c2, vac2);
-		Candidature can3 = new Candidature(null, c2, vac3);
+		CandidaturePk pk1 = new CandidaturePk(c1, vac1);
+		Candidature can1 = new Candidature(pk1, null);
+		CandidaturePk pk2 = new CandidaturePk(c2, vac2);
+		Candidature can2 = new Candidature(pk2, null);
+		CandidaturePk pk3 = new CandidaturePk(c2, vac3);
+		Candidature can3 = new Candidature(pk3, null);
+		CandidaturePk pk4 = new CandidaturePk(c3, vac3);
+		Candidature can4 = new Candidature(pk4, null);
 		candidatureRepo.save(can1);
 		candidatureRepo.save(can2);
 		candidatureRepo.save(can3);
+		candidatureRepo.save(can4);
 	}
 	
 	private void populateCompaniesAndCategories() {

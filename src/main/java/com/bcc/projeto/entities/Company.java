@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -101,6 +100,7 @@ public class Company extends User {
 	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
+
 	@JsonIgnore
 	public List<Vacancy> getVacancies() {
 		return vacancies;
@@ -109,7 +109,6 @@ public class Company extends User {
 	public Category getCategory() {
 		return category;
 	}
-
 
 	@Override
 	public int hashCode() {

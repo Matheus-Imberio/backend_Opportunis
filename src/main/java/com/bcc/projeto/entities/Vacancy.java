@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -103,7 +103,10 @@ public class Vacancy implements Serializable {
 	public void setQtdCandidate(int qtdCandidate) {
 		this.qtdCandidate = qtdCandidate;
 	}
-
+	
+	public void addCandidate() {
+		qtdCandidate++;
+	}
 
 	public Company getCompany() {
 		return company;
@@ -113,6 +116,7 @@ public class Vacancy implements Serializable {
 		this.company = company;
 	}
 
+	@JsonIgnore
 	public List<Candidature> getCandidatures() {
 		return candidatures;
 	}
