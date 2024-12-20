@@ -6,15 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_vacancy")
@@ -30,7 +22,7 @@ public class Vacancy implements Serializable {
 	private int qtdCandidate;
 	private boolean activate = true;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
@@ -41,7 +33,7 @@ public class Vacancy implements Serializable {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category) {
+	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category, Company company) {
 		super();
 		this.id = id;
 		this.goal = goal;
@@ -50,6 +42,7 @@ public class Vacancy implements Serializable {
 		this.wage = wage;
 		this.qtdCandidate = qtdCandidate;
         this.category = category;
+		this.company = company;
     }
 
 	public Vacancy() {

@@ -23,7 +23,7 @@ public class Category implements Serializable {
     private final List<Vacancy> vacancies = new ArrayList<>();
 
     @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @JsonIgnore
     private final List<Company> companies = new ArrayList<>();
 
     public Category() {

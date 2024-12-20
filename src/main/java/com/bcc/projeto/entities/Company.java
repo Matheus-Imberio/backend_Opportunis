@@ -27,7 +27,6 @@ public class Company extends User {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	@JsonBackReference
 	private Category category;
 
 	@OneToMany(mappedBy = "company")
@@ -39,7 +38,7 @@ public class Company extends User {
 	public Company() {}
 
 	public Company(Long id, String name, String email, String telephone, String password,
-				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
+				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality, Category category) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
@@ -47,6 +46,7 @@ public class Company extends User {
 		this.site = site;
 		this.companySector = companySector;
 		this.nationality = nationality;
+		this.category = category;
 	}
 
 	public String getSocialName() {
@@ -104,6 +104,10 @@ public class Company extends User {
 	@JsonIgnore
 	public List<Vacancy> getVacancies() {
 		return vacancies;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public Category getCategory() {
