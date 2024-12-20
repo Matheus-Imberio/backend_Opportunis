@@ -7,7 +7,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -19,10 +18,8 @@ public class Company extends User {
 	private static final long serialVersionUID = 1L;
 
 	private String socialName;
-
 	@Column(unique = true)
 	private String cnpj;
-
 	private int qtdEmployee;
 	private String site;
 	private String companySector;
@@ -30,20 +27,18 @@ public class Company extends User {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	@JsonBackReference
 	private Category category;
-
-	@OneToMany(mappedBy = "company")
-	private List<Feedback> feedbacks = new ArrayList<>();
 
 	@OneToMany(mappedBy = "company")
 	private List<Vacancy> vacancies = new ArrayList<>();
 
+	@OneToMany(mappedBy = "company")
+	private List<Feedback> feedbacks = new ArrayList<>();
 
 	public Company() {}
 
 	public Company(Long id, String name, String email, String telephone, String password,
-				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality) {
+				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality, Category category) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
@@ -51,6 +46,7 @@ public class Company extends User {
 		this.site = site;
 		this.companySector = companySector;
 		this.nationality = nationality;
+		this.category = category;
 	}
 
 	public String getSocialName() {
@@ -110,6 +106,13 @@ public class Company extends User {
 		return vacancies;
 	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
 
 	@Override
 	public int hashCode() {

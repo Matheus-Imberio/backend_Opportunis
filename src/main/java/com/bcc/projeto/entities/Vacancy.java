@@ -1,30 +1,17 @@
 package com.bcc.projeto.entities;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_vacancy")
 public class Vacancy implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -34,20 +21,19 @@ public class Vacancy implements Serializable {
 	private float wage;
 	private int qtdCandidate;
 	private boolean activate = true;
-	
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
 	private Company company;
-	
+
 	@OneToMany(mappedBy = "id.vacancy")
 	private List<Candidature> candidatures = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	@JsonBackReference
 	private Category category;
 
-	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category) {
+	public Vacancy(Long id, String goal, String requirements, String description, float wage, int qtdCandidate, Category category, Company company) {
 		super();
 		this.id = id;
 		this.goal = goal;
@@ -56,6 +42,7 @@ public class Vacancy implements Serializable {
 		this.wage = wage;
 		this.qtdCandidate = qtdCandidate;
         this.category = category;
+		this.company = company;
     }
 
 	public Vacancy() {

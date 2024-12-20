@@ -55,10 +55,10 @@ public class CompanyService {
         company.setName(companyDTO.name());
         company.setEmail(companyDTO.email());
         company.setCnpj(companyDTO.cnpj());
+        company.setCategory(companyDTO.category());
         company.setPassword(encryptedPassword);
         company.setTelephone(companyDTO.telephone());
         company.setRole(Roles.ENTERPRISE);
-        company.setCompanySector(companyDTO.category());
 
         Optional<Company> existingByEmail = repository.findByEmailEquals(company.getEmail());
         if (existingByEmail.isPresent()) {

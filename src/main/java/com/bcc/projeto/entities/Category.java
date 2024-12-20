@@ -1,9 +1,9 @@
 package com.bcc.projeto.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_category")
-public class Category implements Serializable{
-
-    @Serial
-    private static final long  serialVersionUID = 1L;
+public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +19,11 @@ public class Category implements Serializable{
     private String name;
 
     @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @JsonIgnore
     private final List<Vacancy> vacancies = new ArrayList<>();
 
     @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @JsonIgnore
     private final List<Company> companies = new ArrayList<>();
 
     public Category() {
@@ -53,6 +50,7 @@ public class Category implements Serializable{
         this.name = name;
     }
 
+    @JsonIgnore
     public List<Vacancy> getVacancies() {
         return vacancies;
     }
