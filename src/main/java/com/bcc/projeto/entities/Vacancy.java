@@ -21,6 +21,8 @@ public class Vacancy implements Serializable {
 	private float wage;
 	private int qtdCandidate;
 	private boolean activate = true;
+	private int clicks = 0;
+	private String url_image;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
@@ -117,6 +119,14 @@ public class Vacancy implements Serializable {
 	public boolean isActivate() {return activate;}
 
 	public void setActivate(boolean activate) {this.activate = activate;}
+
+	public int getClicks(){
+		return clicks;
+	}
+
+	public void setClicks(int clicks) {
+		this.clicks = clicks;
+	}
 
 	@Override
 	public int hashCode() {
