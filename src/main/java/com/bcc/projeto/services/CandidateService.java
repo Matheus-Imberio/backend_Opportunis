@@ -27,7 +27,7 @@ public class CandidateService {
         this.repository = repository;
     }
 
-    public Page<Candidate> findAll(Pageable pageable) {
+    public Page<Candidate> findAll(Pageable pageable) {    	
         return repository.findAll(pageable);
     }
 

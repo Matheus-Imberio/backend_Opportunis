@@ -9,6 +9,7 @@ import com.bcc.projeto.entities.Candidate;
 import java.util.Optional;
 
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
+	
     Optional<Candidate> findByEmailEquals(String email);
     Optional<Candidate> findBytelephone(String telephone);
     Optional<Candidate> findBycpf(String cpf);
