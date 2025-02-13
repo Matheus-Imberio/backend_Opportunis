@@ -46,8 +46,11 @@ public class VacancyController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Vacancy> FindById(@PathVariable Long id) {
         Vacancy obj = service.findById(id);
+        obj.setClicks(obj.getClicks() + 1);
+        service.update(id,obj);
         return ResponseEntity.ok().body(obj);
     }
+
     @PostMapping
     public ResponseEntity<Vacancy> insert(@RequestBody Vacancy obj) {
         obj = service.insert(obj);

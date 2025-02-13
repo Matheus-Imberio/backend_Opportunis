@@ -62,6 +62,7 @@ public class CandidateService {
         candidate.setCpf(candidateDTO.cpf());
         candidate.setRole(Roles.CANDIDATE);
         candidate.setGenre(candidateDTO.genre());
+        candidate.setUrl(candidateDTO.url_image());
         candidate.setPassword(encryptedPassword);
         repository.save(candidate);
     }
@@ -98,6 +99,7 @@ public class CandidateService {
         entity.setBirthDate(obj.getBirthDate());
         entity.setCpf(obj.getCpf());
         entity.setPassword(obj.getPassword());
+        entity.setUrl(obj.getUrl());
     }
 
     public ResponseDTO findByEmail(String email) {

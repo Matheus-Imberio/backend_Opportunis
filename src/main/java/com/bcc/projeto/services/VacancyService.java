@@ -67,5 +67,6 @@ public class VacancyService {
         entity.setQtdCandidate(obj.getQtdCandidate());
         entity.setActivate(obj.isActivate());
         entity.setCompany(obj.getCompany());
+        entity.setClicks(obj.getClicks());
     }
 }

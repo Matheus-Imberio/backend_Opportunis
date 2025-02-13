@@ -7,8 +7,8 @@ import com.bcc.projeto.entities.enums.Roles;
 import java.time.LocalDate;
 import java.util.Date;
 
-public record CandidateDTO(String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate) {
+public record CandidateDTO(String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate, String url_image) {
     public CandidateDTO(Candidate candidate) {
-        this(candidate.getName(), candidate.getEmail(), candidate.getTelephone(), candidate.getPassword(), candidate.getCpf(), candidate.getGenre(), candidate.getBirthDate());
+        this(candidate.getName(), candidate.getEmail(), candidate.getTelephone(), candidate.getPassword(), candidate.getCpf(), candidate.getGenre(), candidate.getBirthDate(), candidate.getUrl());
     }
 }
