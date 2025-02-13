@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vacancies")
@@ -46,13 +47,20 @@ public class VacancyController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Vacancy> FindById(@PathVariable Long id) {
         Vacancy obj = service.findById(id);
+        obj.setClicks(obj.getClicks() + 1);
+        service.update(id,obj);
         return ResponseEntity.ok().body(obj);
     }
+
     @PostMapping
     public ResponseEntity<Vacancy> insert(@RequestBody Vacancy obj) {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+    }
+    @GetMapping("/hottest")
+    List<Vacancy> findTop4ByClicksDesc(){
+        return service.findTop4ByClicksDesc();
     }
 
     @GetMapping("/category/{id}")

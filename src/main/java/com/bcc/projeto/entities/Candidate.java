@@ -38,18 +38,19 @@ public class Candidate extends User {
 	private final List<Feedback> feedbacks = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "candidate")
-	private List<Curriculum> curriculumns = new ArrayList<>();
-	
+	private List<Curriculum> curriculumns = new ArrayList<>();	
 	private Integer professionalExperienceQtd;
+	private String url_image;
 
 	public Candidate() {}
 
-	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate) {
+	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate, String url_image) {
 		super(id, name, email, telephone, password);
 		this.cpf = cpf;
 		this.genre = genre;
 		this.birthDate = birthDate;
 		this.professionalExperienceQtd = 0;
+		this.url_image = url_image;
 	}
 
 	public String getCpf() {
@@ -74,6 +75,14 @@ public class Candidate extends User {
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public String getUrl(){
+		return url_image;
+	}
+
+	public void setUrl(String url){
+		this.url_image = url;
 	}
 
 	@JsonIgnore

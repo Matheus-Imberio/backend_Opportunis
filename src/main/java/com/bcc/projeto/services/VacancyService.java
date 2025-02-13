@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,10 @@ public class VacancyService {
 
     private final VacancyRepository repository;
     private final CategoryService service;
+
+    public List<Vacancy> findTop4ByClicksDesc(){
+        return repository.findTop4ByClicksDesc();
+    }
 
     @Autowired
     public VacancyService(VacancyRepository vacancyRepository, CategoryService categoryService) {
@@ -67,5 +72,6 @@ public class VacancyService {
         entity.setQtdCandidate(obj.getQtdCandidate());
         entity.setActivate(obj.isActivate());
         entity.setCompany(obj.getCompany());
+        entity.setClicks(obj.getClicks());
     }
 }
