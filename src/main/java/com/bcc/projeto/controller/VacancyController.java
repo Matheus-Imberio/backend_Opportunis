@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vacancies")
@@ -56,6 +57,10 @@ public class VacancyController {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+    }
+    @GetMapping("/hottest")
+    List<Vacancy> findTop4ByClicksDesc(){
+        return service.findTop4ByClicksDesc();
     }
 
     @GetMapping("/category/{id}")
