@@ -1,14 +1,17 @@
 package com.bcc.projeto.repositories;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.bcc.projeto.entities.Candidate;
 
-import java.util.Optional;
-
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
+	
+	@Query(value = "SELECT c FROM Candidate c ORDER BY c.professionalExperienceQtd")
+	public List<Candidate> findAllOrderedByProfessionalExperienceQtd();
 	
     Optional<Candidate> findByEmailEquals(String email);
     Optional<Candidate> findBytelephone(String telephone);

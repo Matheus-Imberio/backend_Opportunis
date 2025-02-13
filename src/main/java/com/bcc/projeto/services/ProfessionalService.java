@@ -8,10 +8,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bcc.projeto.entities.Candidate;
 import com.bcc.projeto.entities.Curriculum;
 import com.bcc.projeto.entities.Professional;
 import com.bcc.projeto.exceptions.DatabaseException;
 import com.bcc.projeto.exceptions.ResourceNotFoundException;
+import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CurriculumRepository;
 import com.bcc.projeto.repositories.ProfessionalRepository;
 
@@ -25,6 +27,9 @@ public class ProfessionalService {
 	
 	@Autowired
 	private CurriculumRepository curriculumRepo;
+	
+	@Autowired
+	private CandidateRepository candidateRepo;
 	
 	public List<Professional> findAllByCurriculumId(Long curriculumId) {
 		Curriculum curr;
@@ -45,6 +50,7 @@ public class ProfessionalService {
 			Curriculum curr = curriculumRepo.findById(curriculumId);
 			professional.setCurriculum(curr);
 			Professional body = professionalRepo.save(professional);
+			curr.getCandidate().addProfessionalExperienceQtd();
 			return body;
 		} catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(curriculumId);
@@ -71,6 +77,10 @@ public class ProfessionalService {
 	@Transactional
 	public void delete(Long id) {
 		try {
+			Professional pro = professionalRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+			Candidate can = pro.getCurriculum().getCandidate();
+			can.subProfessionalExperienceQtd();
+			candidateRepo.save(can);
 			professionalRepo.deleteById(id);
 		} catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
