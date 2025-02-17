@@ -34,11 +34,11 @@ public class Company extends User {
 
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacks = new ArrayList<>();
-
+	private String url_image;
 	public Company() {}
 
 	public Company(Long id, String name, String email, String telephone, String password,
-				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality, Category category) {
+				   String socialName, String cnpj, int qtdEmployee, String site, String companySector, String nationality, Category category, String url_image) {
 		super(id, name, email, telephone, password);
 		this.socialName = socialName;
 		this.cnpj = cnpj;
@@ -47,6 +47,7 @@ public class Company extends User {
 		this.companySector = companySector;
 		this.nationality = nationality;
 		this.category = category;
+		this.url_image = url_image;
 	}
 
 	public String getSocialName() {
@@ -114,6 +115,12 @@ public class Company extends User {
 		return category;
 	}
 
+	public void setUrl_image(String url_image) {
+		this.url_image = url_image;
+	}
+	public String getUrl_image() {
+		return url_image;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -58,6 +58,7 @@ public class CompanyService {
         company.setCategory(companyDTO.category());
         company.setPassword(encryptedPassword);
         company.setTelephone(companyDTO.telephone());
+        company.setUrl_image(companyDTO.url_image());
         company.setRole(Roles.ENTERPRISE);
 
         Optional<Company> existingByEmail = repository.findByEmailEquals(company.getEmail());
@@ -118,6 +119,7 @@ public class CompanyService {
         entity.setSite(obj.getSite());
         entity.setCompanySector(obj.getCompanySector());
         entity.setNationality(obj.getNationality());
+        entity.setUrl_image(obj.getUrl_image());
     }
 
 }
