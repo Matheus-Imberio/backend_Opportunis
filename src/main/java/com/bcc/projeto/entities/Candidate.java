@@ -38,7 +38,8 @@ public class Candidate extends User {
 	private final List<Feedback> feedbacks = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "candidate")
-	private List<Curriculum> curriculumns = new ArrayList<>();
+	private List<Curriculum> curriculumns = new ArrayList<>();	
+	private Integer professionalExperienceQtd;
 	private String url_image;
 
 	public Candidate() {}
@@ -48,6 +49,7 @@ public class Candidate extends User {
 		this.cpf = cpf;
 		this.genre = genre;
 		this.birthDate = birthDate;
+		this.professionalExperienceQtd = 0;
 		this.url_image = url_image;
 	}
 
@@ -100,6 +102,22 @@ public class Candidate extends User {
 	@JsonIgnore
 	public List<Curriculum> getCurriculumns() {
 		return curriculumns;
+	}
+	
+	public Integer getProfessionalExperienceQtd() {
+		return this.professionalExperienceQtd;
+	}
+	
+	public void setProfessionalExperienceQtd(Integer qtd) {
+		this.professionalExperienceQtd = qtd;
+	}
+	
+	public void addProfessionalExperienceQtd() {
+		this.professionalExperienceQtd += 1;
+	}
+	
+	public void subProfessionalExperienceQtd() {
+		this.professionalExperienceQtd -= 1;
 	}
 
 

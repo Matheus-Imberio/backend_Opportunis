@@ -53,6 +53,8 @@ public class CurriculumService {
 			
 		Candidate candidate = candidateRepo.findById(curriculum.getCandidate().getId()).orElseThrow(() -> new ResourceNotFoundException(curriculum.getCandidate().getId()));
 		candidate.getCurriculumns().add(curriculum);
+		candidate.setProfessionalExperienceQtd(candidate.getProfessionalExperienceQtd() + curriculum.getProfessionalExperiences().size());
+		candidateRepo.save(candidate);
 		saveCompositeModels(curriculum);
 		return curriculumRepo.save(curriculum);
 	}
@@ -61,6 +63,8 @@ public class CurriculumService {
 	public Curriculum saveIntoCandidateById(Long candidateId, Curriculum curriculum) {
 		saveCompositeModels(curriculum);
 		Candidate candidate = candidateRepo.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException(candidateId));
+		candidate.setProfessionalExperienceQtd(candidate.getProfessionalExperienceQtd() + curriculum.getProfessionalExperiences().size());
+		candidateRepo.save(candidate);
 		curriculum.setCandidate(candidate);
 		return curriculumRepo.save(curriculum);
 	}

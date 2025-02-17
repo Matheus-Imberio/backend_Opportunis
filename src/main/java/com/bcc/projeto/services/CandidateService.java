@@ -1,13 +1,8 @@
 package com.bcc.projeto.services;
 
-import com.bcc.projeto.dtos.CandidateDTO;
-import com.bcc.projeto.dtos.ResponseDTO;
-import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.entities.enums.Roles;
-import com.bcc.projeto.exceptions.*;
-import com.bcc.projeto.repositories.CandidateRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,7 +10,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.bcc.projeto.dtos.CandidateDTO;
+import com.bcc.projeto.dtos.ResponseDTO;
+import com.bcc.projeto.entities.Candidate;
+import com.bcc.projeto.entities.enums.Roles;
+import com.bcc.projeto.exceptions.CPFAlreadyInUseException;
+import com.bcc.projeto.exceptions.DatabaseException;
+import com.bcc.projeto.exceptions.EmailAlreadyInUseException;
+import com.bcc.projeto.exceptions.ResourceNotFoundException;
+import com.bcc.projeto.exceptions.TelephoneAlreadyInUseException;
+import com.bcc.projeto.repositories.CandidateRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CandidateService {
@@ -27,8 +34,12 @@ public class CandidateService {
         this.repository = repository;
     }
 
-    public Page<Candidate> findAll(Pageable pageable) {
+    public Page<Candidate> findAll(Pageable pageable) {    	
         return repository.findAll(pageable);
+    }
+    
+    public List<Candidate> findAllOrderedByProfessionalExperienceQtd() {
+    	return repository.findAllOrderedByProfessionalExperienceQtd();
     }
 
     public Candidate findById(Long id) {
@@ -37,7 +48,7 @@ public class CandidateService {
     }
 
     @Transactional
-    public Candidate  insert(Candidate obj) throws EmailAlreadyInUseException, CPFAlreadyInUseException, TelephoneAlreadyInUseException {
+    public Candidate insert(Candidate obj) throws EmailAlreadyInUseException, CPFAlreadyInUseException, TelephoneAlreadyInUseException {
         Optional<Candidate> existingByEmail = repository.findByEmailEquals(obj.getEmail());
         if (existingByEmail.isPresent()) {
             throw new EmailAlreadyInUseException("Email já está em uso: " + obj.getEmail());
@@ -106,5 +117,9 @@ public class CandidateService {
         Optional<Candidate> candidateOptional = repository.findByEmailEquals(email);
         Candidate candidate = candidateOptional.orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
         return new ResponseDTO(candidate.getEmail());
+    }
+    
+    private int experienceCounter(Candidate candidate) {
+    	return candidate.getCurriculumns().stream().mapToInt(curriculum -> curriculum.getProfessionalExperiences().size()).sum();
     }
 }
