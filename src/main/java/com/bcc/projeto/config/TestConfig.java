@@ -53,18 +53,18 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-//		Candidate c1 = new Candidate(null, "joao", "joao@gmail", null, "joao123", "00000000000", 'M', null);
-//		Candidate c2 = new Candidate(null, "antonio", "antonio@gmail", null, "antonio123", "11111111111", 'M', null);
-//		Candidate c3 = new Candidate(null, "maria", "maria@gmail", null, "maria123", "22222222222", 'F', null);
-//		Candidate c4 = new Candidate(null, "vitoria", "vitoria@gmail", null, "vitoria123", "33333333333", 'F', null);
-//		
-//		Curriculum curr1 = new Curriculum(null, "Desenvolvedor Junior", "presencial", c1);
-//		Curriculum curr2 = new Curriculum(null, "Desenvolvidor Senior", "Somente remoto", c3);
-//		Curriculum curr3 = new Curriculum(null, "Estágio em TI", "Busca por experiência", c4);
-//	
-//		candidateRepo.saveAll(Arrays.asList(c1, c2, c3, c4));
-//		curriculumService.save(curr1);
-//		curriculumService.save(curr2);
-//		curriculumService.save(curr3);
+		Candidate c1 = new Candidate(null, "joao", "joao@gmail", null, "joao123", "00000000000", 'M', null, null);
+		Candidate c2 = new Candidate(null, "antonio", "antonio@gmail", null, "antonio123", "11111111111", 'M', null, null);
+		Candidate c3 = new Candidate(null, "maria", "maria@gmail", null, "maria123", "22222222222", 'F', null, null);
+		Candidate c4 = new Candidate(null, "vitoria", "vitoria@gmail", null, "vitoria123", "33333333333", 'F', null, null);
+		
+		Curriculum curr1 = new Curriculum(null, "Desenvolvedor Junior", "presencial", c1);
+		Curriculum curr2 = new Curriculum(null, "Desenvolvidor Senior", "Somente remoto", c3);
+		Curriculum curr3 = new Curriculum(null, "Estágio em TI", "Busca por experiência", c4);
+	
+		candidateRepo.saveAll(Arrays.asList(c1, c2, c3, c4));
+		curriculumService.save(curr1);
+		curriculumService.save(curr2);
+		curriculumService.save(curr3);
 	}
 }
