@@ -1,9 +1,6 @@
 package com.bcc.projeto.config;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,12 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.bcc.projeto.entities.Candidate;
-import com.bcc.projeto.entities.Candidature;
 import com.bcc.projeto.entities.Category;
-import com.bcc.projeto.entities.Company;
 import com.bcc.projeto.entities.Curriculum;
-import com.bcc.projeto.entities.Vacancy;
-import com.bcc.projeto.entities.pk.CandidaturePk;
 import com.bcc.projeto.repositories.AdressRepository;
 import com.bcc.projeto.repositories.CandidateRepository;
 import com.bcc.projeto.repositories.CandidatureRepository;
@@ -66,5 +59,18 @@ public class TestConfig implements CommandLineRunner {
 		curriculumService.save(curr1);
 		curriculumService.save(curr2);
 		curriculumService.save(curr3);
+		
+		Category cat1 = new Category("Comércio", null);
+		Category cat2 = new Category("Serviços", null);
+		Category cat3 = new Category("Indústria", null);
+		Category cat4 = new Category("Tecnologia", null);
+		Category cat5 = new Category("Educação", null);
+		Category cat6 = new Category("Saúde", null);
+		Category cat7 = new Category("Alimentação", null);
+		Category cat8 = new Category("Construção", null);
+		Category cat9 = new Category("Transporte", null);
+		Category cat10 = new Category("Outro", null);
+		
+		categoryRepo.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10));
 	}
 }
