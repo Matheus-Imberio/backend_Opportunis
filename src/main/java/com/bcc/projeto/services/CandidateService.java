@@ -1,6 +1,5 @@
 package com.bcc.projeto.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +35,6 @@ public class CandidateService {
 
     public Page<Candidate> findAll(Pageable pageable) {    	
         return repository.findAll(pageable);
-    }
-    
-    public List<Candidate> findAllOrderedByProfessionalExperienceQtd() {
-    	return repository.findAllOrderedByProfessionalExperienceQtd();
     }
 
     public Candidate findById(Long id) {

@@ -1,7 +1,6 @@
 package com.bcc.projeto.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +39,7 @@ public class CandidateController {
 			@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "4") Integer linesPerPage,
 			@RequestParam(defaultValue = "ASC") String direction,
-			@RequestParam(defaultValue = "name") String orderBy) {
+			@RequestParam(defaultValue = "professionalExperienceQtd") String orderBy) {
 		try {
 			Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
 			Pageable pageRequest = PageRequest.of(page, linesPerPage, sortDirection, orderBy);
@@ -49,11 +48,6 @@ public class CandidateController {
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.badRequest().build();
 		}
-	}
-	
-	@GetMapping(value = "/ordered")
-	public ResponseEntity<List<Candidate>> findAllOrderedByProfessionalExperienceQtd() {
-		return ResponseEntity.ok().body(service.findAllOrderedByProfessionalExperienceQtd());
 	}
 	
 	@GetMapping(value = "/{id}")
