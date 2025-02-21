@@ -2,6 +2,7 @@ package com.bcc.projeto.controller;
 
 import java.util.List;
 
+import com.bcc.projeto.services.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +23,16 @@ import com.bcc.projeto.services.CandidatureService;
 public class CandidatureController {
 
 	@Autowired
-	private CandidatureService candidatureService;	
-	
+	private CandidatureService candidatureService;
+
+	@Autowired
+	private VacancyService vacancyService;
+
+
 	@PostMapping
 	public ResponseEntity<Candidature> save(@RequestBody Candidature candidature) {
 		candidature = candidatureService.insert(candidature);
+		vacancyService.updateClicks(candidature.getVacancy().getId());
 		return ResponseEntity.status(HttpStatus.CREATED).body(candidature);
 	}
 	
@@ -48,8 +54,8 @@ public class CandidatureController {
 		Candidature body = candidatureService.findById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(body);
 	}
-	
-	@DeleteMapping(value = "/{candidateId}/{vacancyId}")
+
+		@DeleteMapping(value = "/{candidateId}/{vacancyId}")
 	public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long vacancyId) {
 		candidatureService.delete(candidateId, vacancyId);
 		return ResponseEntity.noContent().build();

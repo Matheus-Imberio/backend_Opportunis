@@ -32,6 +32,10 @@ public class CurriculumController {
 	
 	@PostMapping(value = "/candidates/{candidateId}/curriculumns")
 	public ResponseEntity<Curriculum> saveIntoCandidateById(@PathVariable Long candidateId, @RequestBody Curriculum curriculum) {
+		if (curriculum.getId() != -1) {
+			curriculumService.delete(curriculum.getId());
+		}
+			curriculum.setId(null);
 		Curriculum savedCurriculum = curriculumService.saveIntoCandidateById(candidateId, curriculum);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedCurriculum.getId()).toUri();
 		return ResponseEntity.created(uri).body(savedCurriculum);

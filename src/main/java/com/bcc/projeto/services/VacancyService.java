@@ -59,6 +59,13 @@ public class VacancyService {
         return repository.save(entity);
     }
 
+    @Transactional
+    public Vacancy updateClicks(Long id) {
+        Vacancy entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        entity.setClicks(entity.getClicks() + 1);
+        return repository.save(entity);
+    }
+
     public Page<Vacancy> findByCategory(Long categoryId, Pageable pageable) {
         Category category = service.findById(categoryId);
         return repository.findByCategory(category, pageable);
