@@ -28,9 +28,6 @@ public class Candidate extends User {
 
 	private char genre;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate birthDate;
-
 	@OneToMany(mappedBy = "id.candidate")
 	private final List<Candidature> candidatures = new ArrayList<>();
 	
@@ -44,11 +41,10 @@ public class Candidate extends User {
 
 	public Candidate() {}
 
-	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate, String url_image) {
+	public Candidate(Long id, String name, String email, String telephone, String password, String cpf, char genre, String url_image) {
 		super(id, name, email, telephone, password);
 		this.cpf = cpf;
 		this.genre = genre;
-		this.birthDate = birthDate;
 		this.professionalExperienceQtd = 0;
 		this.url_image = url_image;
 	}
@@ -67,14 +63,6 @@ public class Candidate extends User {
 
 	public void setGenre(char genre) {
 		this.genre = genre;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
 	}
 
 	public String getUrl(){
@@ -105,7 +93,7 @@ public class Candidate extends User {
 	}
 	
 	public Integer getProfessionalExperienceQtd() {
-		return this.professionalExperienceQtd;
+		return this.professionalExperienceQtd == null ? 0 : this.professionalExperienceQtd;
 	}
 	
 	public void setProfessionalExperienceQtd(Integer qtd) {
@@ -125,7 +113,7 @@ public class Candidate extends User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(birthDate, cpf, genre);
+		result = prime * result + Objects.hash(cpf, genre);
 		return result;
 	}
 
@@ -138,11 +126,11 @@ public class Candidate extends User {
 		if (getClass() != obj.getClass())
 			return false;
 		Candidate other = (Candidate) obj;
-		return Objects.equals(birthDate, other.birthDate) && Objects.equals(cpf, other.cpf) && genre == other.genre;
+		return Objects.equals(cpf, other.cpf) && genre == other.genre;
 	}
 
 	@Override
 	public String toString() {
-		return "Candidate [cpf=" + cpf + ", genre=" + genre + ", birthDate=" + birthDate + "]";
+		return "Candidate [cpf=" + cpf + ", genre=" + genre + "]";
 	}
 }

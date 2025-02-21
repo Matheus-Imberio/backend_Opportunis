@@ -5,7 +5,6 @@
     "password": "joao123",
     "cpf": "11122233344",
     "genre": "M",
-    "birthDate": null,
     "candidatures": [],
     "feedbacks": [],
     "curriculumns": []

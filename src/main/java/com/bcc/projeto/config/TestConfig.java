@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.bcc.projeto.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -49,14 +50,21 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private CandidatureRepository candidatureRepo;
+    @Autowired
+    private CandidateService candidateService;
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		Candidate c1 = new Candidate(null, "joao", "joao@gmail", null, "joao123", "00000000000", 'M', null, null);
-		Candidate c2 = new Candidate(null, "antonio", "antonio@gmail", null, "antonio123", "11111111111", 'M', null, null);
-		Candidate c3 = new Candidate(null, "maria", "maria@gmail", null, "maria123", "22222222222", 'F', null, null);
-		Candidate c4 = new Candidate(null, "vitoria", "vitoria@gmail", null, "vitoria123", "33333333333", 'F', null, null);
+
+
+		if (candidateService.findByEmail("joao@gmail").email() != null) {
+			return;
+		}
+
+		Candidate c1 = new Candidate(null, "joao", "joao@gmail", null, "joao123", "00000000000", 'M', null);
+		Candidate c2 = new Candidate(null, "antonio", "antonio@gmail", null, "antonio123", "11111111111", 'M', null);
+		Candidate c3 = new Candidate(null, "maria", "maria@gmail", null, "maria123", "22222222222", 'F', null);
+		Candidate c4 = new Candidate(null, "vitoria", "vitoria@gmail", null, "vitoria123", "33333333333", 'F', null);
 		
 		Curriculum curr1 = new Curriculum(null, "Desenvolvedor Junior", "presencial", c1);
 		Curriculum curr2 = new Curriculum(null, "Desenvolvidor Senior", "Somente remoto", c3);

@@ -21,16 +21,14 @@ public class Administrator extends User {
     private String cpf;
     private char genre;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate birthDate;;
+
     public Administrator() {
     }
 
-    public Administrator(Long id, String name, String email, String telephone, String password, String cpf, char genre, LocalDate birthDate) {
+    public Administrator(Long id, String name, String email, String telephone, String password, String cpf, char genre) {
         super(id, name, email, telephone, password);
         this.cpf = cpf;
         this.genre = genre;
-        this.birthDate = birthDate;
     }
 
     public String getCpf() {
@@ -49,19 +47,11 @@ public class Administrator extends User {
         this.genre = genre;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + Objects.hash(birthDate, cpf, genre);
+        result = prime * result + Objects.hash(cpf, genre);
         return result;
     }
 
@@ -74,11 +64,11 @@ public class Administrator extends User {
         if (getClass() != obj.getClass())
             return false;
         Administrator other = (Administrator) obj;
-        return Objects.equals(birthDate, other.birthDate) && Objects.equals(cpf, other.cpf) && genre == other.genre;
+        return Objects.equals(cpf, other.cpf) && genre == other.genre;
     }
 
     @Override
     public String toString() {
-        return "Candidate [cpf=" + cpf + ", genre=" + genre + ", birthDate=" + birthDate + "]";
+        return "Candidate [cpf=" + cpf + ", genre=" + genre + "]";
     }
 }

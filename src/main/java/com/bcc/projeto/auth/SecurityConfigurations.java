@@ -29,6 +29,9 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/candidates").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/candidates").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/candidates").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/candidates/curriculumns").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

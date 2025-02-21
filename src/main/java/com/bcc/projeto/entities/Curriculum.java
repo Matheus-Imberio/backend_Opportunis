@@ -88,7 +88,7 @@ public class Curriculum implements Serializable {
 	}
 
 	public List<Professional> getProfessionalExperiences() {
-		return professionalExperiences;
+		return this.professionalExperiences;
 	}
 
 	public List<AcademicBackground> getAcademicBackgroundExperience() {

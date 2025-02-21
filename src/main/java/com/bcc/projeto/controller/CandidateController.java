@@ -72,6 +72,9 @@ public class CandidateController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Candidate> update(@PathVariable Long id,@RequestBody Candidate obj){
+		if (obj.getGenre() != 'M' || obj.getGenre() != 'F') {
+			obj.setGenre(service.findById(id).getGenre());
+		}
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}

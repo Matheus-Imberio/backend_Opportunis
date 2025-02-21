@@ -102,7 +102,6 @@ public class CandidateService {
         entity.setGenre(obj.getGenre());
         entity.setEmail(obj.getEmail());
         entity.setTelephone(obj.getTelephone());
-        entity.setBirthDate(obj.getBirthDate());
         entity.setCpf(obj.getCpf());
         entity.setPassword(obj.getPassword());
         entity.setUrl(obj.getUrl());
